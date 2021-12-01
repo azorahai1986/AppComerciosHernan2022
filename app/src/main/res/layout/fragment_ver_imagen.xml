@@ -210,7 +210,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager_similares"
                     android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/ic_launcher_background"
                     app:layout_constraintTop_toBottomOf="@id/card_simil"
                     app:layout_constraintBottom_toBottomOf="@id/constrain_dos"/>
