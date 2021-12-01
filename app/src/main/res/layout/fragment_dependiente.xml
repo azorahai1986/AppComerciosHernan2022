@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="false"
+    tools:context=".fragmentos.dependienteFragment">
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/recycler_dependiente"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:listitem="@layout/item_subcate"
+       android:layout_marginTop="50dp"/>
+
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
+       android:id="@+id/fl_Bt_AgregarProdu"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="bottom|right"
+       android:layout_marginBottom="20dp"
+       android:src="@drawable/ic_black"
+       app:fabSize="normal"
+       android:visibility="gone"
+       android:elevation="10dp"
+       android:backgroundTint="@color/cardview_dark_background"/>
+
+   <TextView
+       android:id="@+id/text_p"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="bottom|right"
+       android:layout_marginRight="70dp"
+       android:layout_marginBottom="35dp"
+       android:text="Agregar Producto"
+       android:visibility="gone"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

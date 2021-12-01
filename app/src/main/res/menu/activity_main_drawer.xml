@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/inicio"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/categorias"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/busqueda"
+            android:icon="@drawable/ic_search"
+            android:title="Busqueda" />
+        <item
+            android:id="@+id/whatsapp"
+            android:icon="@drawable/ic_search"
+            android:title="contactanos" />
+
+
+
+    </group>
+
+
+    <group
+        android:id="@+id/grupo2"
+        android:checkableBehavior="all">
+
+        <item
+            android:id="@+id/porcentajes"
+            android:icon="@drawable/ic_search"
+            android:title="porcentajes" />
+        <item
+            android:id="@+id/carteles"
+            android:icon="@drawable/ic_search"
+            android:title="cartel principal" />
+        <item
+            android:id="@+id/acceder"
+            android:icon="@drawable/ic_logout"
+            android:title="acceder" />
+        <item
+            android:id="@+id/cerrar"
+            android:icon="@drawable/ic_logout"
+            android:title="cerrar" />
+    </group>
+</menu>
