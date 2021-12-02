@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "621580973974",
+    "firebase_url": "https://indumentaria-fd07b.firebaseio.com",
+    "project_id": "indumentaria-fd07b",
+    "storage_bucket": "indumentaria-fd07b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621580973974:android:83a4b1fdb5f12f991c4fb7",
+        "android_client_info": {
+          "package_name": "com.example.navdrawer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621580973974-mqa0dc0nmpgb291ulpg3f5esf3qau2c7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1-_Me0mNykhS1WblL3JrjaOSkxjtFsZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621580973974-mqa0dc0nmpgb291ulpg3f5esf3qau2c7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621580973974:android:dde37f424321549b1c4fb7",
+        "android_client_info": {
+          "package_name": "com.hernan.appcomercioshernan2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621580973974-mqa0dc0nmpgb291ulpg3f5esf3qau2c7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1-_Me0mNykhS1WblL3JrjaOSkxjtFsZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621580973974-mqa0dc0nmpgb291ulpg3f5esf3qau2c7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
