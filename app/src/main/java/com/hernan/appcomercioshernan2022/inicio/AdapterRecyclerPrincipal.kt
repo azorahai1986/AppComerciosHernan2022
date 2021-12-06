@@ -1,6 +1,5 @@
 package com.hernan.appcomercioshernan2022.inicio
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hernan.appcomercioshernan2022.fragmentos.VerImagenFragment
+import com.hernan.appcomercioshernan2022.verImagen.VerImagenFragment
 import com.hernan.appcomercioshernan2022.modelos_de_datos.ModeloDeIndumentaria
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.databinding.ItemProductosBinding

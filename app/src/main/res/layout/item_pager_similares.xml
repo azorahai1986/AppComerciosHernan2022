@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:elevation="6dp"
         app:cardElevation="5dp"
         app:cardCornerRadius="12dp">
@@ -21,8 +21,8 @@
                 android:id="@+id/imageView_similar"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_launcher_background"
+                android:layout_margin="10dp"
+                android:src="@color/black"
                 android:scaleType="fitCenter"/>
 
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="nombre producto"
                 android:textStyle="italic"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:shadowColor="@color/cardview_dark_background"
                 android:shadowDx="2"

@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.databinding.ItemProductosBinding
-import com.hernan.appcomercioshernan2022.fragmentos.VerImagenFragment
-import com.hernan.appcomercioshernan2022.fragmentos.VerImagenSearchFragment
-import com.hernan.appcomercioshernan2022.inicio.AdapterRecyclerPrincipal
+import com.hernan.appcomercioshernan2022.verImagen.VerImagenFragment
 import com.hernan.appcomercioshernan2022.modelos_de_datos.ModeloDeIndumentaria
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -56,7 +54,7 @@ class AdapterSearch(var mutableListModel: ArrayList<ModeloDeIndumentaria>, val a
 
             activity.supportFragmentManager.beginTransaction()
                 .replace(
-                    R.id.containerSearch, VerImagenSearchFragment.newInstance(
+                    R.id.containerSearch, VerImagenFragment.newInstance(
                         modelosFb.imagen, modelosFb.arrayImagen, modelosFb.nombre, modelosFb.marca,
                         "$ $redondeo", modelosFb.id
                     )

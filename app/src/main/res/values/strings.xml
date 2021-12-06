@@ -10,4 +10,6 @@
     <string name="menu_home">Inicio</string>
     <string name="menu_gallery">Cateorias</string>
     <string name="menu_slideshow">Busqueda</string>
+    <string name="crear_anuncio">Crea un Anuncio de Promoción!!  toca la imagen para selecionar uno </string>
+    <string name="crear">crear Anuncio</string>
 </resources>

@@ -9,8 +9,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import com.hernan.appcomercioshernan2022.inicio.PagerPrincipalAdapter
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.example.navdrawer.modelos_de_datos.CartelPrincipal
@@ -28,7 +28,7 @@ class CartelActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private val PICK_IMAGE_REQUEST = 1234
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModelo::class.java) }
+    private val viewModel:MainViewModelo by viewModels()
     private var adapter: PagerPrincipalAdapter? = null
 
     // Método para subir imagenes al firebase storage
@@ -36,7 +36,7 @@ class CartelActivity : AppCompatActivity(), View.OnClickListener {
     private var storageReference: StorageReference? = null
     lateinit var binding: ActivityCartelBinding
     override fun onClick(v: View?) {
-        if (v === binding.imageCrarOfertas)
+        if (v === binding.imagenCrearOfertas)
             showFilerChooser()
         else(v === binding.btCargarOfertas)
         uploadFile()
@@ -50,7 +50,7 @@ class CartelActivity : AppCompatActivity(), View.OnClickListener {
             filePath = data.data
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                binding.imageCrarOfertas!!.setImageBitmap(bitmap)
+                binding.imagenCrearOfertas!!.setImageBitmap(bitmap)
             }catch (e: IOException){
                 e.printStackTrace()
             }
@@ -129,8 +129,8 @@ class CartelActivity : AppCompatActivity(), View.OnClickListener {
         storageReference = storage.reference
 
         // dar funcion al boton e imagen..............................
-        var cargarImagen = findViewById<ImageView>(R.id.image_crar_ofertas)
-        var cargarOferta = findViewById<ImageView>(R.id.bt_cargar_ofertas)
+        var cargarImagen = binding.imagenCrearOfertas
+        var cargarOferta = binding.btCargarOfertas
         cargarImagen.setOnClickListener(this)
         cargarOferta.setOnClickListener(this)
 

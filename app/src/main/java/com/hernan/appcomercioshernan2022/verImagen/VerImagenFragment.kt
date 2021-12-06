@@ -1,10 +1,11 @@
-package com.hernan.appcomercioshernan2022.fragmentos
+package com.hernan.appcomercioshernan2022.verImagen
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -12,23 +13,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import com.airbnb.lottie.LottieAnimationView
-import com.bumptech.glide.Glide
 import com.hernan.appcomercioshernan2022.adapters.PagerSimilaresAdapter
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.example.navdrawer.modelos_de_datos.PagerSimilares
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -39,13 +36,19 @@ import com.hernan.appcomercioshernan2022.actividades.MainActivity
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarBinding
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarImagenBinding
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarPrecioBinding
+import com.hernan.appcomercioshernan2022.databinding.FragmentVerImagenBinding
+import com.hernan.appcomercioshernan2022.inicio.InicioViewModel
 import java.io.IOException
 import java.util.*
 
 
-class VerImagenSearchFragment : Fragment() {
+class VerImagenFragment : Fragment() {
+    var adapterSimilar: PagerSimilaresAdapter? = null
+    var adapterZoom: AdapterPagerVerImagen? = null
+    var viewPagerSimilar: ViewPager2? = null
+    private val viewModel:MainViewModelo by viewModels()
+    private lateinit var inicioViewModel: InicioViewModel
 
-    // variables para los datos recibidos desde el adapterRecyclerPrincipal............................
     var recibirImagen: String? = null
     var recibirImagenes: ArrayList<String>? = null
     var recibirNombre: String? = null
@@ -63,8 +66,7 @@ class VerImagenSearchFragment : Fragment() {
     var mailRecuperado:String? = null
 
     companion object {
-        const val IMAGENRECIBIDA = "imagenRecibida" //para cuando vuelvo atras recordar donde estaba ubicado
-        const val VOLVERBUSQUEDA = "VOLVER" //para cuando vuelvo atras recordar donde estaba ubicado
+
         private const val IM_RECIBIDA = "IM_RECIBIDA" //para recibir la imagen del adapter
         private const val IMAGENES_RECIBIDAS = "IMAGENES_RECIBIDAS" //para recibir la imagen del adapter
         private const val NOMBRE_RECIBIDO = "NOMBRE_RECIBIDO" //para recibir el nombre del adapter
@@ -79,7 +81,7 @@ class VerImagenSearchFragment : Fragment() {
             recibirMarca: String,
             precioRecibido: String,
             recibirId: String
-        ): VerImagenSearchFragment {
+        ): VerImagenFragment {
 
             val bundle = Bundle()
             bundle.putString(IM_RECIBIDA, recibirImagen)
@@ -88,7 +90,7 @@ class VerImagenSearchFragment : Fragment() {
             bundle.putString(MARCA_RECIBIDA, recibirMarca)
             bundle.putString(PRECIO_RECIBIDO, precioRecibido)
             bundle.putString(ID_RECIBIDO, recibirId)
-            val fragment = VerImagenSearchFragment()
+            val fragment = VerImagenFragment()
             fragment.arguments = bundle
 
 
@@ -98,31 +100,22 @@ class VerImagenSearchFragment : Fragment() {
 
     }
 
-    var adapterSimilar: PagerSimilaresAdapter? = null
-    var viewPagerSimilar: ViewPager2? = null
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModelo::class.java) }
+
+
 
     // variables para los elementos que usarè para eliminar o editar
-    var imagenDelAdapter: ImageView? = null
     var nombre: TextView? = null
     var marca: TextView? = null
     var precio: TextView? = null
-    var tvTolocaEdit: TextView? = null
     var btEliminar: FloatingActionButton? = null
-    var cardImagen:CardView? = null
-    var cardProducto:CardView? = null
-    var cardPrecio:CardView? = null
-    var cardZoom:CardView? = null
-    var anim1:LottieAnimationView? = null
-    var anim2:LottieAnimationView? = null
-
+    lateinit var binding:FragmentVerImagenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_ver_imagen, container, false)
+        binding = FragmentVerImagenBinding.inflate(inflater, container, false)
 //  del recycler principal
         storage = Firebase.storage
 
@@ -140,88 +133,42 @@ class VerImagenSearchFragment : Fragment() {
         Log.e("IDVERIMAGENES", recibirId.toString())
         Log.e("IMAGENESVERIMAGEN", recibirImagenes.toString())
 
-        imagenDelAdapter = view.findViewById<ImageView>(R.id.imageView_ver_imagen)// as PhotoView
-        nombre = view.findViewById<TextView>(R.id.textViewNombre)
-        marca = view.findViewById<TextView>(R.id.textview_marca)
-        precio = view.findViewById<TextView>(R.id.textViewPrecio)
-        btEliminar = view.findViewById(R.id.floatEliminarProducto)
-        cardZoom = view.findViewById(R.id.card_zoom)
-        cardImagen = view.findViewById(R.id.card_imagen)
-        cardProducto = view.findViewById(R.id.card_producto)
-        cardPrecio = view.findViewById(R.id.card_precio)
-        var tvElimProducto = view.findViewById<TextView>(R.id.tv_elim_producto)
-        //imageVer = view.findViewById(R.id.imageView_ver_imagen) as PhotoView
-        anim1 = view.findViewById(R.id.animacion2)
-        anim2 = view.findViewById(R.id.animacion3)
-        // botones del dialog
+        binding.textViewNombre.text = recibirNombre
+        binding.textviewMarca.text = recibirMarca
+        binding.textViewPrecio.text = recibirPrecio
+        //Glide.with(requireContext().applicationContext).load(recibirImagen!!).into(binding.imageviewVerImagen)
+
+        inicioViewModel = ViewModelProvider(this)[InicioViewModel::class.java]
+        inicioViewModel.mail.observe(viewLifecycleOwner, {
+
+            inflarBottomNavBar(it)
+        })
+
+        observerDataSimil()
+        inflarViewPagerSimilares()
+        inflarPagerVerImegenes()
+
+        Log.e("MAILRECUPERADO del viewmodel", mailRecuperado.toString())
 
 
-//      ONCLICK...................................................
-        imagenDelAdapter?.setOnClickListener { showFilerChooser() }
-        cardZoom?.setOnClickListener { hacerZoom() }
-
-        Glide.with(requireContext().applicationContext).load(recibirImagen!!).into(imagenDelAdapter!!)
-        nombre?.text = recibirNombre
-        marca?.text = recibirMarca
-        precio?.text = recibirPrecio
 
 
-        // inflar viewPager......................................
 
-        viewPagerSimilar = view.findViewById(R.id.viewPager_similares) as ViewPager2
+
+        return binding.root
+    }
+    fun inflarPagerVerImegenes(){
+        Log.e("RecibMarca", recibirImagenes.toString())
+
+        adapterZoom = AdapterPagerVerImagen(arrayListOf(), context as FragmentActivity)
+        binding.viewPagerZoom.adapter = adapterZoom
+        adapterZoom?.arrayVerImagen =recibirImagenes!!
+        adapterZoom?.notifyDataSetChanged()
+    }
+    fun inflarViewPagerSimilares(){
+        viewPagerSimilar = binding.viewPagerSimilares
         adapterSimilar = PagerSimilaresAdapter(arrayListOf(), context as FragmentActivity)
         viewPagerSimilar?.adapter = adapterSimilar
-        observerDataSimil()
-
-
-        //recuperar usuario..............................................
-        auth = Firebase.auth
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            mailRecuperado = user.email
-
-        }
-        if (mailRecuperado.isNullOrEmpty()){
-            btEliminar?.visibility = View.GONE
-            tvElimProducto.visibility = View.GONE
-            tvTolocaEdit?.visibility = View.GONE
-            anim1?.visibility = View.GONE
-            anim2?.visibility = View.GONE
-            imagenDelAdapter?.isClickable = false
-
-        }else{
-
-            /*val dilatar = AnimationUtils.loadAnimation(context, R.anim.dilatar)
-            val dilatar2 = AnimationUtils.loadAnimation(context, R.anim.abrir2)
-            dilatar.interpolator
-            dilatar.repeatMode = Animation.REVERSE
-            cardImagen?.startAnimation(dilatar)
-            nombre?.startAnimation(dilatar)
-            cardProducto?.startAnimation(dilatar)
-            precio?.startAnimation(dilatar)
-            cardPrecio?.startAnimation(dilatar)
-
-            //dilatar2.repeatMode = Animation.REVERSE
-            tvTolocaEdit?.startAnimation(dilatar2)*/
-        }
-        //dar funciones a los botones  textViews...............................
-        btEliminar?.setOnClickListener { eliminarProducto() }
-        nombre?.setOnClickListener {
-            if (mailRecuperado != null){
-                dialogEditarNombre()
-            }
-        }
-        precio?.setOnClickListener {
-            if (mailRecuperado != null){
-                dialogEditarPrecio()
-            }
-        }
-
-
-
-
-        return view
     }
 
     //  funcion para inflar el viewPager
@@ -231,9 +178,42 @@ class VerImagenSearchFragment : Fragment() {
             androidx.lifecycle.Observer {
                 adapterSimilar!!.similaresArray = it as ArrayList<PagerSimilares>
                 adapterSimilar!!.notifyDataSetChanged()
-                Log.e("RecibMarca", recibirMarca.toString())
             })
 
+    }
+    fun inflarBottomNavBar(mail: String) {
+        if (mail.isEmpty()){
+            binding.bottomNav.visibility = View.GONE
+
+
+        }else{
+            binding.bottomNav.visibility = View.VISIBLE
+
+        }
+
+        binding.bottomNav.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.edicion -> desbloquearEdicion()
+                R.id.edicion_imagen -> showFilerChooser()
+                R.id.eliminar -> eliminarProducto()
+            }
+            true
+
+        }
+    }
+    fun desbloquearEdicion(){
+        binding.textViewNombre.isClickable = true
+        binding.textViewPrecio.isClickable = true
+        Toast.makeText(context, "Edicion desbloqueada", Toast.LENGTH_SHORT).show()
+
+        binding.textViewNombre.setOnClickListener {
+            dialogEditarNombre()
+
+        }
+        binding.textViewPrecio.setOnClickListener {
+            dialogEditarPrecio()
+
+        }
     }
 
     fun eliminarProducto() {
@@ -276,28 +256,6 @@ class VerImagenSearchFragment : Fragment() {
 
 
     }
-    fun editarPrecio(edPrecio: EditText){
-        var preciorecib = edPrecio.text.toString()
-
-        if (preciorecib.isNullOrEmpty()){
-            Toast.makeText(context, "Cambia el nombre de tu producto", Toast.LENGTH_SHORT) .show()
-
-        }else{
-            var map = mutableMapOf<String, Any>()
-            map["precio"] = preciorecib
-            val editar = FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
-                .document(recibirId.toString())
-            editar.update(map)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Producto Modificado con exito", Toast.LENGTH_SHORT) .show()
-                }.addOnFailureListener {
-                    Toast.makeText(context, "Falló Modificación", Toast.LENGTH_SHORT).show()
-
-                }
-            precio?.text = preciorecib
-        }
-    }
-
     fun dialogEditarNombre() {
 
         val dialogBinding = DialogEditarBinding.inflate(requireActivity().layoutInflater, null, false)
@@ -327,40 +285,51 @@ class VerImagenSearchFragment : Fragment() {
 
         }
     }
-    fun dialogEditarPrecio() {
+    private fun dialogEditarPrecio() {
 
 
         val dialogBinding = DialogEditarPrecioBinding.inflate(requireActivity().layoutInflater, null, false)
-        var dialogConstructor = AlertDialog.Builder(context).setView(dialogBinding.root)
+        val dialogConstructor = AlertDialog.Builder(context).setView(dialogBinding.root)
 
-        dialogConstructor.create()
+        //dialogConstructor.create()
 
-        val alertDialog = dialogConstructor.create()
-        var edPrecio = dialogBinding.etPrecioDialog
+        val alertDialog = dialogConstructor.show()
+        var edPrecio = dialogBinding.etPrecioDialog.text
 
-        Log.e("EdPrecio", edPrecio.text.toString())
-        editarPrecio(edPrecio)
 
         //mostrar el dialog
-        //val alertDialog = dialogConstructor.create()
         dialogBinding.btCancelarPrecio.setOnClickListener {
             alertDialog.dismiss()
 
         }
         dialogBinding.btAceptarPrecio.setOnClickListener {
+            Log.e("EdPrecio", edPrecio.toString())
 
-            if (edPrecio.text.isNullOrEmpty()){
+            if (edPrecio.isNullOrEmpty()){
                 Toast.makeText(context, "Agrega un Precio ó cancela", Toast.LENGTH_SHORT)
 
             }else{
-                editarPrecio(edPrecio)
-                alertDialog.dismiss()
+                val map = mutableMapOf<String, Any>()
+                map["precio"] = edPrecio.toString()
+                val editar = FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
+                    .document(recibirId.toString())
+                editar.update(map)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Producto Modificado con exito", Toast.LENGTH_SHORT) .show()
+                    }.addOnFailureListener {
+                        Toast.makeText(context, "Falló Modificación", Toast.LENGTH_SHORT).show()
+
+                    }
+                binding.textViewPrecio.text = edPrecio.toString()
             }
-
+            alertDialog.dismiss()
         }
-    }
 
+
+    }
     fun dialogEditarImagen(){
+        binding.viewPagerZoom.visibility = View.INVISIBLE
+        binding.imageviewVerImagen.visibility = View.VISIBLE
         val dialogBinding = DialogEditarImagenBinding.inflate(requireActivity().layoutInflater, null, false)
         val dialogConstructor = AlertDialog.Builder(context).setView(dialogBinding.root)
 
@@ -383,7 +352,7 @@ class VerImagenSearchFragment : Fragment() {
             filePath = data.data
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, filePath)
-                imagenDelAdapter?.setImageBitmap(bitmap)
+                binding.imageviewVerImagen?.setImageBitmap(bitmap)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -460,14 +429,7 @@ class VerImagenSearchFragment : Fragment() {
 
 
 
-
     }
-    fun hacerZoom() {
 
-        activity?.supportFragmentManager?.beginTransaction()?.
-        setCustomAnimations(R.anim.expandir_lateral_derecho, R.anim.contraer_lateral_derecho, R.anim.expandir_lateral, R.anim.contraer_lateral)?.
-        replace(R.id.containerSearch, ZoomFragment.newInstance(recibirImagenes, recibirId))?.
-        setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.addToBackStack(null)?.commit()
-    }
 
 }

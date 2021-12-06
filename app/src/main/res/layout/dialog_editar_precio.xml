@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edita el Precio"
-                android:textSize="24dp"
+                android:textSize="18dp"
                 android:textColor="#EF1D0E"
                 android:layout_gravity="center"/>
 
@@ -70,11 +70,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Editar"
-                android:layout_marginLeft="55dp"
+                android:layout_marginStart="55dp"
                 android:layout_marginTop="10dp"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/bt_aceptar_precio"
+                android:id="@+id/btAceptarPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_black"

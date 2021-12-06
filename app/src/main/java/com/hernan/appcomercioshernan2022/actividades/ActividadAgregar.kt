@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -135,7 +136,7 @@ class ActividadAgregar : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_actividad_agregar)
 
         //tvSwitch = findViewById(R.id.textview_switch)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         storage = Firebase.storage
 
