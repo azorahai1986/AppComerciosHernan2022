@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_margin="10dp"
             android:orientation="vertical">
@@ -22,9 +22,9 @@
 
         <ImageView
             android:id="@+id/imageview_dependiente"
-            android:src="@drawable/ic_launcher_background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:src="@drawable/cds_logo"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:scaleType="fitCenter"/>
 
         <TextView
@@ -33,11 +33,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="im"
-            android:textSize="18sp"
-            android:shadowColor="@color/cardview_dark_background"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:shadowColor="@color/hernanIntermedio"
             android:shadowDx="2"
-            android:shadowDy="8"
-            android:shadowRadius="7"/>
+            android:shadowDy="2"
+            android:shadowRadius="7"
+            android:padding="2dp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -51,10 +53,10 @@
             android:layout_marginTop="8dp"
             android:text="$140"
             android:textSize="24sp"
-            android:textColor="@color/cardview_shadow_end_color"
+            android:textColor="@color/black"
             android:shadowColor="@color/cardview_dark_background"
             android:shadowDx="2"
-            android:shadowDy="8"
+            android:shadowDy="2"
             android:shadowRadius="3"/>
 
         <TextView
@@ -62,15 +64,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="imagen_de_constantin"
-            android:textColor="#B30024"
+            android:text="Black and decker"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="18sp"
             android:shadowColor="@color/cardview_dark_background"
             android:shadowDx="2"
-            android:shadowDy="8"
-            android:shadowRadius="7"/>
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:padding="5dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

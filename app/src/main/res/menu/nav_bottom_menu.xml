@@ -7,10 +7,6 @@
         android:title="editar"/>
 
     <item
-        android:id="@+id/edicion_imagen"
-        android:icon="@drawable/ic_search"
-        android:title="editar imagen"/>
-    <item
         android:id="@+id/eliminar"
         android:icon="@drawable/ic_search"
         android:title="eliminar producto"/>

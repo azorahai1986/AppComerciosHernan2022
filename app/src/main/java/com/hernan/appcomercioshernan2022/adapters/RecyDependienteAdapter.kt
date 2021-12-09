@@ -27,7 +27,7 @@ class RecyDependienteAdapter(var arrayDependiente:ArrayList<Dependiente>, val fr
         val redondeo = BigDecimal(arrayDep.precio).setScale(2, RoundingMode.HALF_EVEN)
 
         holder.binding.textDependienteProducto.text = arrayDep.nombre + "  " +arrayDep.marca
-        holder.binding.textDependientePrecio.text = redondeo.toString()
+        holder.binding.textDependientePrecio.text = "$ $redondeo"
         holder.binding.textDependienteMarca.text = arrayDep.marca
         Glide.with(fragment).load(arrayDep.imagen).into(holder.binding.imageviewDependiente)
 

@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         binding.navView.setNavigationItemSelectedListener(this)
 
         inflarHomeFragment()
+
+
     }
     public override fun onStart() {
         super.onStart()
@@ -152,7 +154,9 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         return true
     }
     fun inflarHomeFragment(){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, HomeFragment())
+        val idP = intent.getStringExtra("idProd")
+        Log.e("ID de push", idP.toString())
+        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, HomeFragment.newInstance(idP.toString()))
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
     }
 

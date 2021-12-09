@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         android:elevation="@dimen/cardview_compat_inset_shadow"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_margin="5dp"
             android:gravity="center_horizontal">
@@ -32,16 +33,17 @@
 
             <TextView
                 android:id="@+id/text_item_categorias"
-                android:layout_width="221dp"
-                android:layout_height="33dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Alimentos"
-                android:textSize="28dp"
+                android:textSize="28sp"
                 android:textStyle="bold"
+                android:padding="10dp"
                 android:gravity="center"
-                android:textColor="#F30723"
+                android:textColor="@color/black"
                 android:shadowColor="@color/cardview_dark_background"
                 android:shadowDx="2"
-                android:shadowDy="8"
+                android:shadowDy="2"
                 android:shadowRadius="4"/>
 
         </LinearLayout>

@@ -133,8 +133,8 @@ class ActividadAgregarSubCat : AppCompatActivity(), View.OnClickListener {
         storageReference = storage!!.reference
 
 
-        btCargarSub = findViewById(R.id.btCargar_sub)
-        textViewNombreCate = findViewById(R.id.tv_categoria)
+        btCargarSub = binding.btCargarSub
+        textViewNombreCate = binding.tvCategoria
 
         val bundle = intent.extras
         nombreRecibido = bundle?.getString("nombreCate")

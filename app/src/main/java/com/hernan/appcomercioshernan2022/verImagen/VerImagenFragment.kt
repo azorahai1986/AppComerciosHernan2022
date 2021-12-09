@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.opengl.Visibility
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
@@ -25,6 +27,7 @@ import com.hernan.appcomercioshernan2022.adapters.PagerSimilaresAdapter
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.example.navdrawer.modelos_de_datos.PagerSimilares
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -63,7 +66,6 @@ class VerImagenFragment : Fragment() {
 
 // variable para recuperar el usuario
     private lateinit var auth: FirebaseAuth
-    var mailRecuperado:String? = null
 
     companion object {
 
@@ -140,15 +142,22 @@ class VerImagenFragment : Fragment() {
 
         inicioViewModel = ViewModelProvider(this)[InicioViewModel::class.java]
         inicioViewModel.mail.observe(viewLifecycleOwner, {
+            inflarBottomNavBar(it.toString())
 
-            inflarBottomNavBar(it)
         })
+        binding.bottomNav.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.edicion -> desbloquearEdicion()
+                R.id.eliminar -> eliminarProducto()
+            }
+            true
+
+        }
 
         observerDataSimil()
         inflarViewPagerSimilares()
         inflarPagerVerImegenes()
 
-        Log.e("MAILRECUPERADO del viewmodel", mailRecuperado.toString())
 
 
 
@@ -181,31 +190,27 @@ class VerImagenFragment : Fragment() {
             })
 
     }
+
+
     fun inflarBottomNavBar(mail: String) {
-        if (mail.isEmpty()){
-            binding.bottomNav.visibility = View.GONE
-
-
-        }else{
-            binding.bottomNav.visibility = View.VISIBLE
-
-        }
-
-        binding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.edicion -> desbloquearEdicion()
-                R.id.edicion_imagen -> showFilerChooser()
-                R.id.eliminar -> eliminarProducto()
+        Log.e("VIEWMODEL IT", mail.toString())
+        val nulo = "null"
+        when {
+            mail == nulo ->{ binding.bottomNav.isVisible = false
             }
-            true
-
+            mail != null -> { binding.bottomNav.isVisible = true
+            }
         }
     }
+
     fun desbloquearEdicion(){
         binding.textViewNombre.isClickable = true
         binding.textViewPrecio.isClickable = true
-        Toast.makeText(context, "Edicion desbloqueada", Toast.LENGTH_SHORT).show()
+        binding.textViewNombre.setBackgroundResource(R.color.teal_700)
+        binding.textViewPrecio.setBackgroundResource(R.color.teal_700)
 
+
+        Toast.makeText(context, "toca los elementos resaltados con color para editarlos", Toast.LENGTH_LONG).show()
         binding.textViewNombre.setOnClickListener {
             dialogEditarNombre()
 
@@ -281,6 +286,9 @@ class VerImagenFragment : Fragment() {
             }else{
                 editarNombre(etnom)
                 alertDialog.dismiss()
+                binding.textViewNombre.setBackgroundResource(R.color.hernanOscuro)
+                binding.textViewPrecio.setBackgroundResource(R.color.hernanOscuro)
+
             }
 
         }
@@ -430,6 +438,18 @@ class VerImagenFragment : Fragment() {
 
 
     }
-
+    /*fun onSNACK(view: View){
+        //Snackbar(view)
+        val snackbar = Snackbar.make(view, "edita los datos marcados con color",
+            Snackbar.LENGTH_LONG).setAction("Action", null)
+        snackbar.setActionTextColor(Color.BLUE)
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.LTGRAY)
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.BLUE)
+        textView.textSize = 18f
+        snackbar.show()
+    }*/
 
 }

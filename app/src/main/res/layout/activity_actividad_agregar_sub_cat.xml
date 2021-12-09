@@ -20,13 +20,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:id="@+id/tv_categoria"
+            android:id="@+id/tvCategoria"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="10dp"
             android:text="Categria"
             android:textStyle="bold"
-            android:textColor="#B30033"
+            android:textColor="@color/black"
             android:textSize="18dp"
             android:textAlignment="center"/>
     </LinearLayout>
@@ -78,7 +78,7 @@
             android:layout_height="258dp"
             android:elevation="10dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/cds_logo" />
 
     </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -97,13 +97,13 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btCargar_sub"
+                android:id="@+id/btCargarSub"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
-                android:background="@color/cardview_dark_background"
+                android:backgroundTint="@color/purple_700"
                 android:text="Cargar marca"
-                android:textColor="@color/cardview_shadow_end_color"/>
+                android:textColor="@color/white"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -111,7 +111,7 @@
         android:id="@+id/tolbar_agregar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/material_dynamic_primary0"
+        android:background="@color/hernanIntermedio"
         android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

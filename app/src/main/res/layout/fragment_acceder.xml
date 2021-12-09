@@ -5,13 +5,31 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/hernanIntermedio"
     tools:context=".fragmentos.AccederFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingresa solo si eres el Administrador"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="22dp"
+        android:layout_marginTop="70dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        android:layout_margin="10dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:outlineAmbientShadowColor="@color/cardview_dark_background"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
         <EditText
             android:id="@+id/etEmail"
@@ -19,15 +37,18 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nuevo Email"
-            app:hintAnimationEnabled= "false"
+            android:textColorHint="@color/white"
+            app:hintAnimationEnabled= "true"
             android:inputType="textEmailAddress"
+            android:background="@color/hernanOscuro"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:layout_margin="10dp">
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
@@ -35,6 +56,7 @@
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
+            android:background="@color/hernanOscuro"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,15 +64,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white">
         <Button
             android:id="@+id/btAcceder"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="#039BE5"
+            android:backgroundTint="@color/purple_700"
             android:layout_gravity="center"
             android:text="Acceder"
-            android:textColor="#FFFFFF" />
+            android:padding="10dp"
+            android:layout_margin="3dp"
+            android:textColor="@color/white" />
 
     </androidx.cardview.widget.CardView>
 

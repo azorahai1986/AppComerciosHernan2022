@@ -93,6 +93,7 @@ class ActividadAgregarProducto : AppCompatActivity() {
                     FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
                         .document().set(map)
                     finish()
+
                 }
 
             }
@@ -238,8 +239,8 @@ class ActividadAgregarProducto : AppCompatActivity() {
         val bundle = intent.extras
         var marca = bundle?.getString("marca")
 
-        tvMarca = findViewById(R.id.tv_marca)
-        tvSwitch = findViewById(R.id.tv_switch)
+        tvMarca = binding.tvMarca
+        tvSwitch = binding.tvSwitch
         tvMarca?.text = marca
 
         //btCargarProdu = findViewById(R.id.btCargar_produ)

@@ -1,6 +1,6 @@
 package com.hernan.appcomercioshernan2022.inicio
 
-import android.app.AlertDialog
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -18,23 +18,27 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.lottie.LottieAnimationView
-import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.example.navdrawer.modelos_de_datos.CartelPrincipal
 import com.hernan.appcomercioshernan2022.modelos_de_datos.ModeloDeIndumentaria
 import com.hernan.appcomercioshernan2022.R
-import com.hernan.appcomercioshernan2022.actividades.CartelActivity
 import com.hernan.appcomercioshernan2022.databinding.FragmentHomeBinding
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
+import com.hernan.appcomercioshernan2022.firestore_corrutinas.ViewModelCorrutinas
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 enum class ProviderType {
     BIENVENIDO
 }
-class HomeFragment : Fragment() {
 
+private const val ID_DOCUMENT = "idDocument"
+
+class HomeFragment : Fragment() {
     private lateinit var inicioViewModel: InicioViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var idDocumet: String? = null
 
+    lateinit var intent:Intent
     var isOpen = true // para las animcaiones de los botones
 
     private var adapterRecyclerPrincipal: AdapterRecyclerPrincipal? = null
@@ -42,7 +46,8 @@ class HomeFragment : Fragment() {
     private var layoutManager:RecyclerView.LayoutManager? = null
     private var recyclerView:RecyclerView? = null
     private var viewPagerCartelPrincipal:ViewPager2? = null
-    private val viewModel:MainViewModelo by viewModels()
+    private val viewModelo: MainViewModelo by viewModels()
+    private val viewModel:ViewModelCorrutinas by viewModels()
     // para darle movimiento automatico al viewPager
     private var indicator:DotsIndicator? = null //indicador para el viewPager
     private var animationCartel:LottieAnimationView? = null
@@ -57,7 +62,12 @@ class HomeFragment : Fragment() {
     }
     lateinit var homeFragment: HomeFragment
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            idDocumet = it.getString(ID_DOCUMENT)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,12 +87,14 @@ class HomeFragment : Fragment() {
 
         })
 
+        intent = Intent()
 
         inflarRecycler()
         inflarPager()
-        observeData()
+        initObserverrs()
         cargarPagerCartelPrincipal()
 
+        Log.e("ID DOCUMENT HOMEFRAg", idDocumet.toString())
         return root
 
 
@@ -116,25 +128,63 @@ class HomeFragment : Fragment() {
         })
 
     }
+    fun indexarRecycler(): Int {
 
-    fun observeData(){
-        viewModel.fetchUserData().observe(this.viewLifecycleOwner, androidx.lifecycle.Observer {
-            adapterRecyclerPrincipal!!.setData(it as ArrayList<ModeloDeIndumentaria>)
-            adapterRecyclerPrincipal!!.notifyDataSetChanged()
+        for (i in 0 until adapterRecyclerPrincipal!!.arrayFiltro.size){
 
-           /* if (idRecibid != null){
-                val i = busqueda()
-                if (i>-1){
-                    recyclerView!!.layoutManager!!.scrollToPosition(i)
-                }
-            }*/
+            if (adapterRecyclerPrincipal!!.arrayFiltro[i].id == idDocumet){
+                return i
+            }
+        }
+        return -1
 
-        })
+    }
+    fun posicionarRecycler(i: Int, arrayPrincipal: ArrayList<ModeloDeIndumentaria>?) {
+
+        if (i > -1){
+            if (arrayPrincipal != null){
+                Log.e("ErrorPrueba 3", i.toString())
+                Log.e("ErrorPrueba 3", arrayPrincipal.toString())
+
+                binding.recyclerProductos.layoutManager?.scrollToPosition(i)
+            }
+
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initObserverrs() {
+
+        viewModel.firestoreData.observe(viewLifecycleOwner) {
+            if (idDocumet != null){
+                val i = indexarRecycler()
+                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
+                Log.e("Id DOC ", i.toString())
+                Log.e("Id DOC 2 ", adapterRecyclerPrincipal?.arrayFiltro.toString())
+
+            }
+            when(it.type) {
+
+                ModeloDeIndumentaria.TYPE.ADD -> adapterRecyclerPrincipal?.arrayFiltro?.add(it)
+
+
+                else -> {Log.e("ErrorPrue 1", it.toString())}
+
+            }
+
+            adapterRecyclerPrincipal?.notifyDataSetChanged()
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
+            Log.e("ErrorPrueba", it.toString())
+        }
+        viewModel.getFirestore()
+
+
 
     }
 
     fun cargarPagerCartelPrincipal(){
-        viewModel.fetchUserDataOfertas().observe(this.viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModelo.fetchUserDataOfertas().observe(this.viewLifecycleOwner, androidx.lifecycle.Observer {
         adapterCartelPrincipal!!.itemCartel = it as ArrayList<CartelPrincipal>
         adapterCartelPrincipal!!.notifyDataSetChanged()
             // para inflar y desaparecer las animaciones de carga
@@ -148,35 +198,21 @@ class HomeFragment : Fragment() {
         })
     }
 
-    fun irAlInicio(){
-        homeFragment = HomeFragment()
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.fragment_container_view_tag, homeFragment)
-            ?.commit()
-    }
-
-    fun dialQuienSomos(){
-        val dialogQuien =LayoutInflater.from(activity).inflate(R.layout.dialog_quienes_somos, null)
-        val constructorDialog = AlertDialog.Builder(activity).setView(dialogQuien).setTitle("   Mercado y Comercio")
-        // mostrar dialog.
-        constructorDialog.show()
-    }
 
     override fun onResume() {
         super.onResume()
-        observeData()
         cargarPagerCartelPrincipal()
 
     }
-
-    /*fun busqueda():Int{
-        for (i in 0 until adapterRecyclerPrincipal!!.mutableListModel.size){
-            if (adapterRecyclerPrincipal!!.mutableListModel[i].id == idRecibid){
-                return i
-            }
-        }
-        return -1
-    }*/
+    private fun removeObservers() {
+        viewModel.firestoreData.removeObservers(this)
+        viewModel.error.removeObservers(this)
+        viewModel.removeListener()
+    }
+    override fun onStop() {
+        super.onStop()
+        removeObservers()
+    }
 
     fun instanciarVistas(emailUser: String) {
 
@@ -194,5 +230,15 @@ class HomeFragment : Fragment() {
     fun modoOscuroYClaro(){
         AppCompatDelegate.MODE_NIGHT_NO
 
+    }
+    companion object {
+
+        @JvmStatic
+        fun newInstance(idDoc: String) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ID_DOCUMENT, idDoc)
+                }
+            }
     }
 }

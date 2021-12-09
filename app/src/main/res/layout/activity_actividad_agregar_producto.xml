@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        app:cardElevation="@dimen/cardview_compat_inset_shadow"
         app:cardCornerRadius="15dp"
         android:elevation="10dp">
 
@@ -25,7 +24,8 @@
                 android:layout_height="match_parent"
                 android:elevation="10dp"
                 android:text="Categria"
-                android:textColor="@color/cardview_shadow_end_color"
+                android:background="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textAlignment="center"/>
         </LinearLayout>
@@ -34,20 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="105dp"
-        app:cardElevation="@dimen/cardview_compat_inset_shadow"
+        android:layout_marginTop="130dp"
         app:cardCornerRadius="15dp"
         app:cardMaxElevation="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+            android:layout_height="wrap_content">
 
             <AutoCompleteTextView
                 android:id="@+id/tv_produ"
-                android:layout_width="250dp"
-                android:layout_height="41dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:elevation="10dp"
                 android:hint="Seleccione un producto"
                 android:inputType="textAutoCorrect|textPersonName"/>
@@ -59,8 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="165dp"
-        app:cardElevation="@dimen/cardview_compat_inset_shadow"
+        android:layout_marginTop="180dp"
         app:cardCornerRadius="15dp"
         app:cardMaxElevation="5dp">
 
@@ -87,8 +84,8 @@
         android:id="@+id/viewpagerCrearProdu"
         android:layout_width="350dp"
         android:layout_height="200dp"
-        android:background="@drawable/ic_black"
-        android:layout_marginTop="225dp"
+        android:background="@drawable/cds_logo"
+        android:layout_marginTop="240dp"
         android:layout_gravity="center_horizontal"
         android:elevation="10dp"
         android:scrollbarStyle="insideOverlay"
@@ -99,12 +96,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="425dp"
+        android:layout_marginTop="470dp"
         android:layout_gravity="center_horizontal"
         app:cardElevation="@dimen/cardview_compat_inset_shadow"
         app:cardCornerRadius="15dp"
         app:cardMaxElevation="5dp"
-        android:backgroundTint="@color/black">
+        android:backgroundTint="@color/purple_700">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,7 +113,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:layout_margin="5dp"
-                android:background="@color/black"
+                android:backgroundTint="@color/purple_700"
                 android:text="Agregar fotos"
                 android:textColor="@color/white"/>
         </LinearLayout>
@@ -126,8 +123,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="490dp"
-        android:backgroundTint="@color/black"
+        android:layout_marginTop="560dp"
+        android:backgroundTint="@color/purple_700"
         app:cardElevation="10dp"
         app:cardCornerRadius="15dp"
         app:cardMaxElevation="5dp">
@@ -141,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
-                android:background="@color/browser_actions_bg_grey"
+                android:backgroundTint="@color/purple_700"
                 android:text="Cargar Producto"
                 android:textColor="@color/white"/>
         </LinearLayout>
@@ -152,7 +149,7 @@
         android:id="@+id/tolbar_agregar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/browser_actions_bg_grey"
+        android:background="@color/hernanIntermedio"
         android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

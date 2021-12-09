@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.hernan.appcomercioshernan2022.adapters.CategoriasAdapter
@@ -37,7 +38,7 @@ import java.util.*
 
 
 const val TOPIC = "/topics/general"
-class ActividadAgregar : AppCompatActivity(), View.OnClickListener {
+class ActividadAgregar : AppCompatActivity() {
     // para enviar los push.........................................
     val TAG = "ActividadAgregar"
     var tvSwitch: TextView? = null
@@ -58,7 +59,7 @@ class ActividadAgregar : AppCompatActivity(), View.OnClickListener {
             filePath = data.data
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                binding.imageViewSub!!.setImageBitmap(bitmap)
+                binding.imageViewCate!!.setImageBitmap(bitmap)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -133,7 +134,7 @@ class ActividadAgregar : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityActividadAgregarBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_actividad_agregar)
+        setContentView(binding.root)
 
         //tvSwitch = findViewById(R.id.textview_switch)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
@@ -145,7 +146,7 @@ class ActividadAgregar : AppCompatActivity(), View.OnClickListener {
         storageReference = storage!!.reference
 
 
-        binding.imageViewSub.setOnClickListener(this)
+        binding.imageViewCate.setOnClickListener {showFilerChooser()}
        
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
@@ -229,9 +230,5 @@ class ActividadAgregar : AppCompatActivity(), View.OnClickListener {
         }
     }
 */
-    override fun onClick(v: View?) {
-        if (v === binding.imageViewSub)
-            showFilerChooser()
 
-    }
 }

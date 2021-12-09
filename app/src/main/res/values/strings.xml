@@ -12,4 +12,6 @@
     <string name="menu_slideshow">Busqueda</string>
     <string name="crear_anuncio">Crea un Anuncio de Promoción!!  toca la imagen para selecionar uno </string>
     <string name="crear">crear Anuncio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/browser_actions_bg_grey"
     tools:context=".actividades.ActividadAgregar">
 
     <androidx.cardview.widget.CardView
@@ -40,6 +39,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardImagenCate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -53,12 +53,13 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView_sub"
+                android:id="@+id/imageViewCate"
                 android:layout_width="310dp"
                 android:layout_height="258dp"
                 android:elevation="10dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/cds_logo"
+                android:clickable="true"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -94,7 +95,7 @@
         android:id="@+id/tolbar_agregar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/cardview_shadow_end_color"
+        android:background="@color/hernanIntermedio"
         android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

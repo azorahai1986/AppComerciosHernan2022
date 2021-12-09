@@ -56,6 +56,16 @@ class AdapterRecyclerPrincipal(var mutableListModel: ArrayList<ModeloDeIndumenta
         }
 
     }
+    fun getIndex(mutableArray: ModeloDeIndumentaria): Int {
+        var index = -1
+        mutableListModel.forEachIndexed { i, p ->
+            if(mutableArray.id == p.id) {
+                index = i
+                return@forEachIndexed
+            }
+        }
+        return index
+    }
 
 
 }

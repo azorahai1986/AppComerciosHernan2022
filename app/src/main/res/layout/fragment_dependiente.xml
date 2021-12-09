@@ -20,11 +20,11 @@
        android:layout_height="wrap_content"
        android:layout_gravity="bottom|right"
        android:layout_marginBottom="20dp"
-       android:src="@drawable/ic_black"
+       android:src="@drawable/ic_agregar"
        app:fabSize="normal"
        android:visibility="gone"
        android:elevation="10dp"
-       android:backgroundTint="@color/cardview_dark_background"/>
+       android:backgroundTint="@color/teal_200"/>
 
    <TextView
        android:id="@+id/text_p"
@@ -34,6 +34,7 @@
        android:layout_marginRight="70dp"
        android:layout_marginBottom="35dp"
        android:text="Agregar Producto"
-       android:visibility="gone"/>
+       android:visibility="gone"
+       android:textColor="@color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
