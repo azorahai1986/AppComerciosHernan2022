@@ -156,13 +156,6 @@ class HomeFragment : Fragment() {
     private fun initObserverrs() {
 
         viewModel.firestoreData.observe(viewLifecycleOwner) {
-            if (idDocumet != null){
-                val i = indexarRecycler()
-                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
-                Log.e("Id DOC ", i.toString())
-                Log.e("Id DOC 2 ", adapterRecyclerPrincipal?.arrayFiltro.toString())
-
-            }
             when(it.type) {
 
                 ModeloDeIndumentaria.TYPE.ADD -> adapterRecyclerPrincipal?.arrayFiltro?.add(it)
@@ -173,6 +166,14 @@ class HomeFragment : Fragment() {
             }
 
             adapterRecyclerPrincipal?.notifyDataSetChanged()
+            if (idDocumet != null){
+                val i = indexarRecycler()
+                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
+                Log.e("Id DOC ", i.toString())
+                Log.e("Id DOC 2 ", adapterRecyclerPrincipal?.arrayFiltro.toString())
+
+            }
+
         }
         viewModel.error.observe(viewLifecycleOwner) {
             Log.e("ErrorPrueba", it.toString())
