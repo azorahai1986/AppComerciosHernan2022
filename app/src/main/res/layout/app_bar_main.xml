@@ -10,14 +10,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
         android:theme="@style/Theme.AppComerciosHernan2022.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/hernanIntermedio"
+            android:background="?attr/colorPrimaryVariant"
             app:popupTheme="@style/Theme.AppComerciosHernan2022.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

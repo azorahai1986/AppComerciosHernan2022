@@ -35,6 +35,10 @@
        android:layout_marginBottom="35dp"
        android:text="Agregar Producto"
        android:visibility="gone"
-       android:textColor="@color/white"/>
+       android:textColor="@color/white"
+       android:shadowColor="@color/cardview_dark_background"
+       android:shadowDx="6"
+       android:shadowDy="2"
+       android:shadowRadius="7"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

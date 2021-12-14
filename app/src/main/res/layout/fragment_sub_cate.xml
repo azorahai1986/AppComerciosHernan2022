@@ -41,7 +41,11 @@
             android:layout_marginBottom="35dp"
             android:visibility="gone"
             android:text="Agregar Marca"
-            android:textColor="@color/design_default_color_primary_dark"/>
+            android:textColor="@color/white"
+            android:shadowColor="@color/cardview_dark_background"
+            android:shadowDx="6"
+            android:shadowDy="2"
+            android:shadowRadius="7"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

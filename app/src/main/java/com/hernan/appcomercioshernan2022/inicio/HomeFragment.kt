@@ -60,7 +60,6 @@ class HomeFragment : Fragment() {
 
         }
     }
-    lateinit var homeFragment: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +86,9 @@ class HomeFragment : Fragment() {
 
         })
 
-        intent = Intent()
-
+        initObserverrs()
         inflarRecycler()
         inflarPager()
-        initObserverrs()
         cargarPagerCartelPrincipal()
 
         Log.e("ID DOCUMENT HOMEFRAg", idDocumet.toString())
@@ -139,6 +136,40 @@ class HomeFragment : Fragment() {
         return -1
 
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initObserverrs() {
+
+        viewModel.firestoreData.observe(viewLifecycleOwner) {
+
+            if (idDocumet != null) {
+                val i = indexarRecycler()
+                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
+                adapterRecyclerPrincipal?.notifyDataSetChanged()
+
+
+
+            }
+
+            when (it.type) {
+
+                    ModeloDeIndumentaria.TYPE.ADD -> adapterRecyclerPrincipal?.arrayFiltro?.add(it)
+
+
+            }
+            adapterRecyclerPrincipal?.notifyDataSetChanged()
+
+
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) {
+            Log.e("ErrorPrueba", it.toString())
+        }
+        viewModel.getFirestore()
+
+
+
+    }
     fun posicionarRecycler(i: Int, arrayPrincipal: ArrayList<ModeloDeIndumentaria>?) {
 
         if (i > -1){
@@ -150,38 +181,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun initObserverrs() {
-
-        viewModel.firestoreData.observe(viewLifecycleOwner) {
-            when(it.type) {
-
-                ModeloDeIndumentaria.TYPE.ADD -> adapterRecyclerPrincipal?.arrayFiltro?.add(it)
-
-
-                else -> {Log.e("ErrorPrue 1", it.toString())}
-
-            }
-
-            adapterRecyclerPrincipal?.notifyDataSetChanged()
-            if (idDocumet != null){
-                val i = indexarRecycler()
-                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
-                Log.e("Id DOC ", i.toString())
-                Log.e("Id DOC 2 ", adapterRecyclerPrincipal?.arrayFiltro.toString())
-
-            }
-
-        }
-        viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("ErrorPrueba", it.toString())
-        }
-        viewModel.getFirestore()
-
-
-
     }
 
     fun cargarPagerCartelPrincipal(){
@@ -228,10 +227,7 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    fun modoOscuroYClaro(){
-        AppCompatDelegate.MODE_NIGHT_NO
 
-    }
     companion object {
 
         @JvmStatic

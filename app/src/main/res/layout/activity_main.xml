@@ -23,7 +23,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_encabezado"
         app:menu="@menu/activity_main_drawer"
-        android:backgroundTint="@color/hernanOscuro"/>
+        android:backgroundTint="?attr/colorSecondaryVariant"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

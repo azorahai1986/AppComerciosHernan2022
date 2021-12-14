@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardElevation="@dimen/cardview_compat_inset_shadow"
-        app:cardCornerRadius="10dp"
-        android:backgroundTint="@color/hernanOscuroFondos">
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,11 +37,11 @@
                 android:layout_marginTop="12dp"
                 android:text="imagen_de_constant"
                 android:textSize="14sp"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorAccent"
                 android:elevation="10dp"
                 android:shadowColor="@color/cardview_dark_background"
                 android:shadowDx="2"
-                android:shadowDy="8"
+                android:shadowDy="2"
                 android:shadowRadius="7"/>
             <View
                 android:layout_width="match_parent"
@@ -56,12 +55,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorAccent"
                 android:text="imagen_de"
                 android:textSize="14sp"
                 android:shadowColor="@color/cardview_dark_background"
                 android:shadowDx="2"
-                android:shadowDy="8"
+                android:shadowDy="2"
                 android:shadowRadius="7"/>
             <TextView
                 android:id="@+id/textview_precio"
@@ -71,10 +70,10 @@
                 android:text="$140"
                 android:textStyle="bold"
                 android:textSize="30sp"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorAccent"
                 android:shadowColor="@color/cardview_dark_background"
                 android:shadowDx="2"
-                android:shadowDy="8"
+                android:shadowDy="2"
                 android:shadowRadius="8"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

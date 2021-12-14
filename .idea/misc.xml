@@ -7,6 +7,7 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_cartel.xml" value="0.925" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_logout.xml" value="0.5214285714285715" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_money_24.xml" value="0.5214285714285715" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_search.xml" value="1.167857142857143" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar.xml" value="0.22" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar_producto.xml" value="0.33" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar_sub_cat.xml" value="0.25" />
@@ -39,7 +40,7 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_categorias.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_dependiente.xml" value="0.67" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_imagenescrear.xml" value="1.0986842105263157" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pager_similares.xml" value="1.0986842105263157" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pager_similares.xml" value="0.75" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pager_zoom.xml" value="1.0986842105263157" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pdf.xml" value="1.0986842105263157" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_porcen_sub.xml" value="1.0986842105263157" />

@@ -39,7 +39,11 @@
         android:layout_marginBottom="35dp"
         android:visibility="gone"
         android:text="Agregar Categoria"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:shadowColor="@color/cardview_dark_background"
+        android:shadowDx="6"
+        android:shadowDy="2"
+        android:shadowRadius="7"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

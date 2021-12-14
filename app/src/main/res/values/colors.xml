@@ -11,4 +11,9 @@
     <color name="hernanIntermedio">#424242</color>
     <color name="hernanOscuro">#1b1b1b</color>
     <color name="hernanOscuroFondos">#1E1F1E</color>
+
+    <color name="hernanClaroLigt">#b2fab4</color>
+    <color name="hernanIntermedioLight">#81c784</color>
+    <color name="hernanOscuroLight">#519657</color>
+    <color name="hernanOscuroFondosLight">#F1F4F1</color>
 </resources>
