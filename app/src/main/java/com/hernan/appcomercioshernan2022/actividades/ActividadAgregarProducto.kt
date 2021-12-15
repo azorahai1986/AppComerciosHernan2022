@@ -79,6 +79,7 @@ class ActividadAgregarProducto : AppCompatActivity() {
             map["nombre"] = producto
             map["imagen"] = imagen
             map["arrayImagen"] = arrayIm
+            map["timestamp"] = Date().time
 
 
             when {

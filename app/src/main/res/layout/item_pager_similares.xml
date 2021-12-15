@@ -23,7 +23,7 @@
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
                 android:src="@color/black"
-                android:scaleType="fitCenter"/>
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/text_nombre_similar"

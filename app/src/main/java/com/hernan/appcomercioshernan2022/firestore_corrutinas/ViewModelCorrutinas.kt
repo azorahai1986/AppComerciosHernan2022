@@ -16,7 +16,7 @@ class ViewModelCorrutinas(private val modelRepository: RepoCorrutinas = RepoCorr
             modelRepository.getFirestoreData().collect {
 
                 when(it){
-                    is Result.Success<*> -> firestoreData.value = (it.data as ModeloDeIndumentaria?)!!
+                    is Result.Success -> firestoreData.value = (it.data as ModeloDeIndumentaria?)!!
                     is Result.Error -> error.value = it.error
                 }
             }
