@@ -193,7 +193,6 @@ class ActividadAgregarProducto : AppCompatActivity() {
             binding.viewpagerCrearProdu.adapter = adapterImagenes
             adapterImagenes?.arrayImagenes = arrayImagePath
             adapterImagenes?.notifyDataSetChanged()
-            //adapterImagenes = AdapterImagenCrear(, this)
 
 
             /**
@@ -203,19 +202,7 @@ class ActividadAgregarProducto : AppCompatActivity() {
              * adapterViewPager.arrayPath = arrayImagePath
              * adaoterViewPager.notifySetDataChanged()
              */
-            /*filePath = data.data
-            try {
 
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                /**
-                 * mostrar las imagenes
-                 */
-                // imageView_produ!!.setImageBitmap(bitmap)
-
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }*/
         }
 
     }
@@ -244,15 +231,7 @@ class ActividadAgregarProducto : AppCompatActivity() {
         tvSwitch = binding.tvSwitch
         tvMarca?.text = marca
 
-        //btCargarProdu = findViewById(R.id.btCargar_produ)
-
         adapterImagenes = AdapterImagenCrear(arrayListOf())
-
-
-
-
-        //adapterImagenes?.arrayImagenes = arrayImagePath
-
 
 
         binding.btCargarFoto.setOnClickListener {
