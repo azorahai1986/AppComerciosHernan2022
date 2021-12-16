@@ -27,7 +27,7 @@
                 android:id="@+id/imagen_item_categorias"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:layout_marginTop="5dp"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
