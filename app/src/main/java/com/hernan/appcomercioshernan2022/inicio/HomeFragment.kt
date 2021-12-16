@@ -136,52 +136,40 @@ class HomeFragment : Fragment() {
         return -1
 
     }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun initObserverrs() {
-
-        viewModel.firestoreData.observe(viewLifecycleOwner) {
-
-            if (idDocumet != null) {
-                val i = indexarRecycler()
-                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
-                adapterRecyclerPrincipal?.notifyDataSetChanged()
-
-
-
-            }
-
-            when (it.type) {
-
-                    ModeloDeIndumentaria.TYPE.ADD -> adapterRecyclerPrincipal?.arrayFiltro?.add(it)
-
-
-            }
-            adapterRecyclerPrincipal?.notifyDataSetChanged()
-
-
-        }
-
-        viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("ErrorPrueba", it.toString())
-        }
-        viewModel.getFirestore()
-
-
-
-    }
     fun posicionarRecycler(i: Int, arrayPrincipal: ArrayList<ModeloDeIndumentaria>?) {
 
         if (i > -1){
             if (arrayPrincipal != null){
-                Log.e("ErrorPrueba 3", i.toString())
-                Log.e("ErrorPrueba 3", arrayPrincipal.toString())
+                Log.e("index I ", i.toString())
+                Log.e("ArrayPrincipal", arrayPrincipal.toString())
 
                 binding.recyclerProductos.layoutManager?.scrollToPosition(i)
             }
 
         }
     }
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initObserverrs() {
+
+        viewModelo.fetchUserData().observe(viewLifecycleOwner) {
+            adapterRecyclerPrincipal!!.arrayFiltro=it as ArrayList<ModeloDeIndumentaria>
+
+            adapterRecyclerPrincipal!!.notifyDataSetChanged()
+
+
+            if (idDocumet != null) {
+                val i = indexarRecycler()
+                Log.e("index I 2 ", i.toString())
+
+                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
+
+            }
+
+        }
+
+
+    }
+
 
     fun cargarPagerCartelPrincipal(){
         viewModelo.fetchUserDataOfertas().observe(this.viewLifecycleOwner, androidx.lifecycle.Observer {
@@ -216,7 +204,7 @@ class HomeFragment : Fragment() {
 
     fun instanciarVistas(emailUser: String) {
 
-        Log.e("INSTANCIARVISTA", emailUser)
+       // Log.e("INSTANCIARVISTA", emailUser)
         val rotate = AnimationUtils.loadAnimation(context, R.anim.rotar)
         val abrire = AnimationUtils.loadAnimation(context, R.anim.abrir)
         val cerrar = AnimationUtils.loadAnimation(context, R.anim.cerrar)
