@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hernan.appcomercioshernan2022.adapters.RecyclerSubcate
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.hernan.appcomercioshernan2022.modelos_de_datos.SubCategorias
@@ -30,7 +31,7 @@ import java.util.*
 class ActividadAgregarSubCat : AppCompatActivity(), View.OnClickListener {
 
     val TAG = "ActividadAgregar"
-    var btCargarSub: Button? = null
+    var btCargarSub: FloatingActionButton? = null
     var idRecibido:String? = null
     var nombreRecibido:String? = null
     var textViewNombreCate:TextView? = null
@@ -133,7 +134,7 @@ class ActividadAgregarSubCat : AppCompatActivity(), View.OnClickListener {
         storageReference = storage!!.reference
 
 
-        btCargarSub = binding.btCargarSub
+        btCargarSub = binding.btCargarSubcate
         textViewNombreCate = binding.tvCategoria
 
         val bundle = intent.extras

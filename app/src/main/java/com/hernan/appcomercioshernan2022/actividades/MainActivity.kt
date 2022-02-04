@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar.make
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.databinding.ActivityMainBinding
 import com.hernan.appcomercioshernan2022.fragmentos.AccederFragment
@@ -61,6 +62,9 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     }
     public override fun onStart() {
         super.onStart()
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null){

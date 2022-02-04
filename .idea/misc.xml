@@ -3,17 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-anydpi/ic_Texto_sc.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_agregar.xml" value="0.925" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_cartel.xml" value="0.925" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_logout.xml" value="0.5214285714285715" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_money_24.xml" value="0.5214285714285715" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_search.xml" value="1.167857142857143" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_tilde.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable/ic_sobre.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable/imagen_cs_background.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar.xml" value="0.22" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar_producto.xml" value="0.33" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar_producto.xml" value="0.2" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_agregar_sub_cat.xml" value="0.25" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_actividad_busqueda.xml" value="0.20046082949308755" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_cartel.xml" value="0.1" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_pantalla_presentacion.xml" value="0.17527173913043478" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/app_bar_main.xml" value="0.36151079136690645" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/content_main.xml" value="0.209375" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/dialog_editar.xml" value="0.5" />
@@ -29,22 +34,22 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_gallery.xml" value="0.209375" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_pdf.xml" value="0.18" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_porcentaje.xml" value="0.7302631578947368" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_porcentaje.xml" value="0.16" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_search.xml" value="0.45390070921985815" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_slideshow.xml" value="0.209375" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_sub_cate.xml" value="0.22" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_ver_imagen.xml" value="0.33" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_zoom.xml" value="1.0986842105263157" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/header_encabezado.xml" value="1.0986842105263157" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_cartel.xml" value="0.9757281553398058" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_cartel.xml" value="0.3673469387755102" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_categorias.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_dependiente.xml" value="0.67" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_imagenescrear.xml" value="1.0986842105263157" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pager_similares.xml" value="0.75" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pager_zoom.xml" value="1.0986842105263157" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_pdf.xml" value="1.0986842105263157" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_porcen_sub.xml" value="1.0986842105263157" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_productos.xml" value="0.7555147058823529" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_porcen_sub.xml" value="0.2" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_productos.xml" value="0.18" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_recycler_busqueda.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_subcate.xml" value="0.33" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_verimagen.xml" value="0.6694078947368421" />
@@ -53,6 +58,8 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/menu/activity_main_drawer.xml" value="0.9" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/menu/main.xml" value="1.3714285714285714" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/menu/nav_bottom_menu.xml" value="1.3714285714285714" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/mipmap-anydpi-v26/imagen_cs.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/mipmap-anydpi-v26/imagen_cs_round.xml" value="0.10989583333333333" />
       </map>
     </option>
   </component>

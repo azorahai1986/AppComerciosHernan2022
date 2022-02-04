@@ -40,8 +40,8 @@ class AdapterPorcenSubCate(var mutableListSub: ArrayList<SubCategorias>, val act
 
         var textViePorcentje= holder.binding.textviewPocen.text
         var cardViewPorcentaje = holder.binding.cardViewSubPorcen
-        textViePorcentje = modelSubPorcen.marca
         holder.binding.textviewPocen.text = modelSubPorcen.porcentaje
+        holder.binding.textDescripcionSub.text = modelSubPorcen.marca
         Glide.with(activity).load(modelSubPorcen.imagen).into(holder.binding.imageViewSub)
 
         if (!modelSubPorcen.porcentaje.isNullOrEmpty()){

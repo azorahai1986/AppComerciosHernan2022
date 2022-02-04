@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -151,21 +152,37 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initObserverrs() {
 
-        viewModelo.fetchUserData().observe(viewLifecycleOwner) {
-            adapterRecyclerPrincipal!!.arrayFiltro=it as ArrayList<ModeloDeIndumentaria>
+        viewModel.firestoreData.observe(viewLifecycleOwner) {
 
-            adapterRecyclerPrincipal!!.notifyDataSetChanged()
-
+            when (it.type) {
+                ModeloDeIndumentaria.TYPE.ADD -> {
+                    val index = adapterRecyclerPrincipal?.arrayFiltro?.size ?: 0
+                    adapterRecyclerPrincipal?.arrayFiltro?.add(it)
+                    //adapterRecyclerPrincipal?.notifyItemInserted(index)
+                }
+            }
 
             if (idDocumet != null) {
                 val i = indexarRecycler()
-                Log.e("index I 2 ", i.toString())
-
                 posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
+                //adapterRecyclerPrincipal?.notifyDataSetChanged()
+
+
 
             }
 
+
+            adapterRecyclerPrincipal?.notifyDataSetChanged()
+
+
         }
+
+        viewModel.error.observe(viewLifecycleOwner) {
+            Log.e("ErrorPrueba", it.toString())
+        }
+        viewModel.getFirestore()
+
+
 
 
     }
@@ -204,6 +221,10 @@ class HomeFragment : Fragment() {
 
     fun instanciarVistas(emailUser: String) {
 
+        binding.tvVolverInicio.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_layout, HomeFragment())
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+        }
        // Log.e("INSTANCIARVISTA", emailUser)
         val rotate = AnimationUtils.loadAnimation(context, R.anim.rotar)
         val abrire = AnimationUtils.loadAnimation(context, R.anim.abrir)

@@ -19,7 +19,6 @@ import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.hernan.appcomercioshernan2022.modelos_de_datos.ModeloDeIndumentaria
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -34,6 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+
 
 class ActividadAgregarProducto : AppCompatActivity() {
 
@@ -238,7 +238,6 @@ class ActividadAgregarProducto : AppCompatActivity() {
             showFilerChooser()
         }
 
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
         val dilatar = AnimationUtils.loadAnimation(this, R.anim.dilatar)
         // dar funcion al swith..........................................
         binding.switchPush.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -317,17 +316,27 @@ class ActividadAgregarProducto : AppCompatActivity() {
         }
 
     fun lanzarPush(id:String) {
+
+        var url = ""
+        for (u in arrayURLs){
+            url = u
+        }
+        Log.e("Arry URL", url.toString())
+
+        //val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, bigUri)
         val title = binding.tvProdu.text.toString()
         val message = binding.tvMarca?.text.toString() + " $ " + binding.etPrecioProdu.text.toString()
         if (title.isNotEmpty() && message.isNotEmpty()) {
             PushNotification(
-                NotificationData(title, message, id),
-                TOPIC
-            ).also {
+                NotificationData(title, message, id, url), TOPIC).also {
                 sendNotification(it)
 
             }
         }
-        
+
+
     }
+
+
+
 }

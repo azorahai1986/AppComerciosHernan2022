@@ -36,7 +36,7 @@ class AdapterRecyclerPrincipal(var mutableListModel: ArrayList<ModeloDeIndumenta
     override fun onBindViewHolder(holder: ViewHolderModel, position: Int) {
         val modelosFb = arrayFiltro[position]
 
-        val precio = modelosFb.precio.toDouble()
+        var precio = modelosFb.precio.toDouble()
         val redondeo = BigDecimal(precio).setScale(2, RoundingMode.HALF_EVEN)
 
         holder.binding.textviewNombre.text = modelosFb.nombre + " "+modelosFb.marca

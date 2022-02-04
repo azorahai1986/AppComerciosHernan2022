@@ -10,12 +10,12 @@ import kotlinx.coroutines.launch
 class ViewModelCorrutinas(private val modelRepository: RepoCorrutinas = RepoCorrutinas()): ViewModel() {
     val firestoreData = MutableLiveData<ModeloDeIndumentaria>()
     val error = MutableLiveData<Throwable>()
-    //val repo = RepoCorrutinas()
     fun getFirestore() {
         viewModelScope.launch {
             modelRepository.getFirestoreData().collect {
 
                 when(it){
+                    is Result.Success<*> -> firestoreData.value = (it.data as ModeloDeIndumentaria?)!!
                     is Result.Success -> firestoreData.value = (it.data as ModeloDeIndumentaria?)!!
                     is Result.Error -> error.value = it.error
                 }
