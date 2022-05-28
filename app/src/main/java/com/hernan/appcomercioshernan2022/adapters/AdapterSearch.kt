@@ -54,10 +54,7 @@ class AdapterSearch(var mutableListModel: ArrayList<ModeloDeIndumentaria>, val a
 
             activity.supportFragmentManager.beginTransaction()
                 .replace(
-                    R.id.containerSearch, VerImagenFragment.newInstance(
-                        modelosFb.imagen, modelosFb.arrayImagen, modelosFb.nombre, modelosFb.marca,
-                        "$ $redondeo", modelosFb.id
-                    )
+                    R.id.containerSearch, VerImagenFragment()
                 )
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null)
                 .commit()

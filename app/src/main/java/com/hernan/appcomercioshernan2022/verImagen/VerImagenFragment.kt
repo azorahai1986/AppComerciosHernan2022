@@ -4,9 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -14,20 +12,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.hernan.appcomercioshernan2022.adapters.PagerSimilaresAdapter
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.example.navdrawer.modelos_de_datos.PagerSimilares
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -35,11 +30,12 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.hernan.appcomercioshernan2022.R
-import com.hernan.appcomercioshernan2022.actividades.MainActivity
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarBinding
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarImagenBinding
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarPrecioBinding
 import com.hernan.appcomercioshernan2022.databinding.FragmentVerImagenBinding
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.DeleteData
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import com.hernan.appcomercioshernan2022.inicio.InicioViewModel
 import java.io.IOException
 import java.util.*
@@ -50,6 +46,7 @@ class VerImagenFragment : Fragment() {
     var adapterZoom: AdapterPagerVerImagen? = null
     var viewPagerSimilar: ViewPager2? = null
     private val viewModel:MainViewModelo by viewModels()
+    private val viewModelFirestore:ViewModelFirestore by activityViewModels()
     private lateinit var inicioViewModel: InicioViewModel
 
     var recibirImagen: String? = null
@@ -66,50 +63,6 @@ class VerImagenFragment : Fragment() {
 
 // variable para recuperar el usuario
     private lateinit var auth: FirebaseAuth
-
-    companion object {
-
-        private const val IM_RECIBIDA = "IM_RECIBIDA" //para recibir la imagen del adapter
-        private const val IMAGENES_RECIBIDAS = "IMAGENES_RECIBIDAS" //para recibir la imagen del adapter
-        private const val NOMBRE_RECIBIDO = "NOMBRE_RECIBIDO" //para recibir el nombre del adapter
-        private const val MARCA_RECIBIDA = "MARCA_RECIBIDA" //para recibir la descripcion del adapter
-        private const val PRECIO_RECIBIDO = "PRECIO_RECIBIDO" //para recibir el precio del adapter
-        private const val ID_RECIBIDO = "ID_RECIBIDO" //para recibir el precio del adapter y plasmarlo en el viewPager
-
-        fun newInstance(
-            recibirImagen: String,
-            recibirImagenes: ArrayList<String>,
-            recibirNombre: String,
-            recibirMarca: String,
-            precioRecibido: String,
-            recibirId: String
-        ): VerImagenFragment {
-
-            val bundle = Bundle()
-            bundle.putString(IM_RECIBIDA, recibirImagen)
-            bundle.putSerializable(IMAGENES_RECIBIDAS, recibirImagenes)
-            bundle.putString(NOMBRE_RECIBIDO, recibirNombre)
-            bundle.putString(MARCA_RECIBIDA, recibirMarca)
-            bundle.putString(PRECIO_RECIBIDO, precioRecibido)
-            bundle.putString(ID_RECIBIDO, recibirId)
-            val fragment = VerImagenFragment()
-            fragment.arguments = bundle
-
-
-            return fragment
-
-        }
-
-    }
-
-
-
-
-    // variables para los elementos que usarè para eliminar o editar
-    var nombre: TextView? = null
-    var marca: TextView? = null
-    var precio: TextView? = null
-    var btEliminar: FloatingActionButton? = null
     lateinit var binding:FragmentVerImagenBinding
 
     override fun onCreateView(
@@ -121,19 +74,19 @@ class VerImagenFragment : Fragment() {
 //  del recycler principal
         storage = Firebase.storage
 
-        // dare init a firebase
-        storage = FirebaseStorage.getInstance()
-        storageReference = storage!!.reference
-        recibirImagen = arguments?.getString(IM_RECIBIDA)
-        recibirImagenes = arguments?.getSerializable(IMAGENES_RECIBIDAS) as ArrayList<String>?
-        recibirNombre = arguments?.getString(NOMBRE_RECIBIDO)
-        recibirMarca = arguments?.getString(MARCA_RECIBIDA)
-        recibirPrecio = arguments?.getString(PRECIO_RECIBIDO)
-        recibirId = arguments?.getString(ID_RECIBIDO)
+        //Log.e("IDVERIMAGENES", recibirId.toString())
+
+        val data = viewModelFirestore.dataFirestore.also {
+            recibirNombre = it.nombre
+            recibirImagen = it.imagen
+            recibirMarca = it.marca
+            recibirImagenes = it.arrayImagen
+            recibirPrecio = it.precio
+            recibirId = it.id
+        }
 
 
-        Log.e("IDVERIMAGENES", recibirId.toString())
-        Log.e("IMAGENESVERIMAGEN", recibirImagenes.toString())
+        Log.e("IMAGENESVERIMAGEN", data.toString())
 
         binding.textViewNombre.text = recibirNombre
         binding.textviewMarca.text = recibirMarca
@@ -141,10 +94,10 @@ class VerImagenFragment : Fragment() {
         //Glide.with(requireContext().applicationContext).load(recibirImagen!!).into(binding.imageviewVerImagen)
 
         inicioViewModel = ViewModelProvider(this)[InicioViewModel::class.java]
-        inicioViewModel.mail.observe(viewLifecycleOwner, {
+        inicioViewModel.mail.observe(viewLifecycleOwner) {
             inflarBottomNavBar(it.toString())
 
-        })
+        }
         binding.bottomNav.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.edicion -> desbloquearEdicion()
@@ -182,9 +135,7 @@ class VerImagenFragment : Fragment() {
 
     //  funcion para inflar el viewPager
     private fun observerDataSimil() {
-        viewModel.fetchUserDataSimilares(recibirMarca).observe(
-            this.viewLifecycleOwner,
-            androidx.lifecycle.Observer {
+        viewModel.fetchUserDataSimilares(recibirMarca).observe(viewLifecycleOwner,androidx.lifecycle.Observer {
                 adapterSimilar!!.similaresArray = it as ArrayList<PagerSimilares>
                 adapterSimilar!!.notifyDataSetChanged()
             })
@@ -222,18 +173,8 @@ class VerImagenFragment : Fragment() {
     }
 
     fun eliminarProducto() {
-        FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
-            .document(recibirId.toString())
-            .delete().addOnSuccessListener {
-                Toast.makeText(context, "Archivo Eliminado", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                Toast.makeText(context, "Falló", Toast.LENGTH_SHORT).show()
-
-            }
-
-        val intent = Intent(context, MainActivity::class.java)
-        startActivity(intent)
-
+        val delete = DeleteData()
+        delete.deleteFirestore(recibirId!!, context)
     }
 
     fun editarNombre(etnom: EditText) {
@@ -255,7 +196,7 @@ class VerImagenFragment : Fragment() {
                     Toast.makeText(context, "Falló Modificación", Toast.LENGTH_SHORT).show()
 
                 }
-            nombre?.text = nombrerecib
+            binding.textViewNombre.text = nombrerecib
         }
 
 
@@ -438,18 +379,5 @@ class VerImagenFragment : Fragment() {
 
 
     }
-    /*fun onSNACK(view: View){
-        //Snackbar(view)
-        val snackbar = Snackbar.make(view, "edita los datos marcados con color",
-            Snackbar.LENGTH_LONG).setAction("Action", null)
-        snackbar.setActionTextColor(Color.BLUE)
-        val snackbarView = snackbar.view
-        snackbarView.setBackgroundColor(Color.LTGRAY)
-        val textView =
-            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-        textView.setTextColor(Color.BLUE)
-        textView.textSize = 18f
-        snackbar.show()
-    }*/
 
 }

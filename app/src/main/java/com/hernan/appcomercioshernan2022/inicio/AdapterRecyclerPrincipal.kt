@@ -1,20 +1,28 @@
 package com.hernan.appcomercioshernan2022.inicio
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hernan.appcomercioshernan2022.verImagen.VerImagenFragment
 import com.hernan.appcomercioshernan2022.modelos_de_datos.ModeloDeIndumentaria
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.databinding.ItemProductosBinding
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 class AdapterRecyclerPrincipal(var mutableListModel: ArrayList<ModeloDeIndumentaria>, val activity:FragmentActivity): RecyclerView.Adapter<AdapterRecyclerPrincipal.ViewHolderModel>() {
+
+    private val viewModelFirestore:ViewModelFirestore by activity.viewModels()
 
     var arrayFiltro: ArrayList<ModeloDeIndumentaria> = ArrayList()
     fun setData(datos: ArrayList<ModeloDeIndumentaria>){
@@ -47,11 +55,9 @@ class AdapterRecyclerPrincipal(var mutableListModel: ArrayList<ModeloDeIndumenta
 
         holder.binding.imageview.setOnClickListener{
 
-
+            viewModelFirestore.dataFirestore = modelosFb
             activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.frame_layout, VerImagenFragment.newInstance(
-                    modelosFb.imagen, modelosFb.arrayImagen, modelosFb.nombre, modelosFb.marca,
-                    "$ $redondeo", modelosFb.id))
+                .replace(R.id.frame_layout, VerImagenFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).commit()
         }
 

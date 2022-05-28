@@ -35,6 +35,7 @@ android {
         viewBinding true
     }
     compileSdkVersion 31
+    namespace 'com.hernan.appcomercioshernan2022'
 }
 
 dependencies {

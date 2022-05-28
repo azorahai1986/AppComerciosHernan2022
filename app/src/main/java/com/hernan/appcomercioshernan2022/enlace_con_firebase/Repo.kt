@@ -17,25 +17,32 @@ class Repo {
          */
 
         val mutableData = MutableLiveData<MutableList<ModeloDeIndumentaria>>()
-        FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
-            .get().addOnSuccessListener {
+        firestoreData().collection("ModeloDeIndumentaria").addSnapshotListener { snapshot, e ->
+            val listData = mutableListOf<ModeloDeIndumentaria>()
 
-                val listData = mutableListOf<ModeloDeIndumentaria>()
+            if (e != null) {
+                return@addSnapshotListener
 
-                for (obtenerFireBase in it.documents){
-                    val indument = obtenerFireBase.toObject(ModeloDeIndumentaria::class.java)
-                    indument?.id = obtenerFireBase.id
-                    if (indument != null)
+            }
 
-                        listData.add(indument)
+            if (snapshot != null) {
+                for (data in snapshot){
+                    val idData = data.toObject(ModeloDeIndumentaria::class.java)
+                    idData.id = data.id
+
+
+                    listData.add(idData)
+
                 }
+
                 mutableData.value = listData
 
-
-            }.addOnFailureListener {
-                Log.e("ErrorMODELO", it.toString())
-                //Esto lo hice para probar si llega internet a la app.
+            } else {
+                Log.e("DATA en Viewmodel", "No hay data")
             }
+
+        }
+
         return mutableData
     }
 

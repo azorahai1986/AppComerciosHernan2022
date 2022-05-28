@@ -152,30 +152,18 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initObserverrs() {
 
-        viewModel.firestoreData.observe(viewLifecycleOwner) {
-
-            when (it.type) {
-                ModeloDeIndumentaria.TYPE.ADD -> {
-                    val index = adapterRecyclerPrincipal?.arrayFiltro?.size ?: 0
-                    adapterRecyclerPrincipal?.arrayFiltro?.add(it)
-                    //adapterRecyclerPrincipal?.notifyItemInserted(index)
-                }
-            }
-
-            if (idDocumet != null) {
-                val i = indexarRecycler()
-                posicionarRecycler(i, adapterRecyclerPrincipal?.arrayFiltro)
-                //adapterRecyclerPrincipal?.notifyDataSetChanged()
-
-
-
-            }
-
+        viewModelo.fetchUserData().observe(viewLifecycleOwner) {
+            adapterRecyclerPrincipal?.arrayFiltro = it as ArrayList<ModeloDeIndumentaria>
 
             adapterRecyclerPrincipal?.notifyDataSetChanged()
 
 
-        }
+            }
+
+
+
+
+
 
         viewModel.error.observe(viewLifecycleOwner) {
             Log.e("ErrorPrueba", it.toString())
