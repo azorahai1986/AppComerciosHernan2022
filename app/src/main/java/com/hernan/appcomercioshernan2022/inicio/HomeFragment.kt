@@ -81,11 +81,11 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         //val textView: TextView = binding.textOfertas
-        inicioViewModel.mail.observe(viewLifecycleOwner, {
+        inicioViewModel.mail.observe(viewLifecycleOwner) {
             val emailUser = it
             instanciarVistas(emailUser)
 
-        })
+        }
 
         initObserverrs()
         inflarRecycler()
@@ -210,8 +210,11 @@ class HomeFragment : Fragment() {
     fun instanciarVistas(emailUser: String) {
 
         binding.tvVolverInicio.setOnClickListener {
+            /*
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_layout, HomeFragment())
-            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()*/
+            //binding.recyclerProductos.layoutManager?.scrollToPosition(i)
+            layoutManager?.smoothScrollToPosition(binding.recyclerProductos, null, 3)
         }
        // Log.e("INSTANCIARVISTA", emailUser)
         val rotate = AnimationUtils.loadAnimation(context, R.anim.rotar)

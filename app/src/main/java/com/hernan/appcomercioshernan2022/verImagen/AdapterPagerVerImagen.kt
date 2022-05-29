@@ -22,6 +22,8 @@ inner class ViewHolderVer(itemView: View):RecyclerView.ViewHolder(itemView){
     override fun onBindViewHolder(holder: ViewHolderVer, position: Int) {
         val imagenZoom = arrayVerImagen[position]
 
+
+
         Glide.with(context.applicationContext).load(imagenZoom).into(holder.binding.zoomageViewVer)
     }
 

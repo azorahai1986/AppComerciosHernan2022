@@ -14,10 +14,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.hernan.appcomercioshernan2022.adapters.PagerSimilaresAdapter
@@ -30,11 +27,13 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.hernan.appcomercioshernan2022.R
+import com.hernan.appcomercioshernan2022.actividades.MainActivity
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarBinding
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarImagenBinding
 import com.hernan.appcomercioshernan2022.databinding.DialogEditarPrecioBinding
 import com.hernan.appcomercioshernan2022.databinding.FragmentVerImagenBinding
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.DeleteData
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.EditFirestore
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import com.hernan.appcomercioshernan2022.inicio.InicioViewModel
 import java.io.IOException
@@ -48,6 +47,7 @@ class VerImagenFragment : Fragment() {
     private val viewModel:MainViewModelo by viewModels()
     private val viewModelFirestore:ViewModelFirestore by activityViewModels()
     private lateinit var inicioViewModel: InicioViewModel
+    var editFirestor = EditFirestore()
 
     var recibirImagen: String? = null
     var recibirImagenes: ArrayList<String>? = null
@@ -175,6 +175,10 @@ class VerImagenFragment : Fragment() {
     fun eliminarProducto() {
         val delete = DeleteData()
         delete.deleteFirestore(recibirId!!, context)
+        val intent = Intent(context, MainActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
+
     }
 
     fun editarNombre(etnom: EditText) {
@@ -185,17 +189,7 @@ class VerImagenFragment : Fragment() {
             Toast.makeText(context, "Cambia el nombre de tu producto", Toast.LENGTH_SHORT) .show()
 
         }else{
-            var map = mutableMapOf<String, Any>()
-            map["nombre"] = nombrerecib
-            val editar = FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
-                .document(recibirId.toString())
-            editar.update(map)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "Producto Modificado con exito", Toast.LENGTH_SHORT) .show()
-                }.addOnFailureListener {
-                    Toast.makeText(context, "Falló Modificación", Toast.LENGTH_SHORT).show()
-
-                }
+            editFirestor.mapNombre(nombrerecib, recibirId, context)
             binding.textViewNombre.text = nombrerecib
         }
 
@@ -258,17 +252,7 @@ class VerImagenFragment : Fragment() {
                 Toast.makeText(context, "Agrega un Precio ó cancela", Toast.LENGTH_SHORT)
 
             }else{
-                val map = mutableMapOf<String, Any>()
-                map["precio"] = edPrecio.toString()
-                val editar = FirebaseFirestore.getInstance().collection("ModeloDeIndumentaria")
-                    .document(recibirId.toString())
-                editar.update(map)
-                    .addOnSuccessListener {
-                        Toast.makeText(context, "Producto Modificado con exito", Toast.LENGTH_SHORT) .show()
-                    }.addOnFailureListener {
-                        Toast.makeText(context, "Falló Modificación", Toast.LENGTH_SHORT).show()
-
-                    }
+                editFirestor.mapPrecio(edPrecio.toString(), recibirId, context)
                 binding.textViewPrecio.text = edPrecio.toString()
             }
             alertDialog.dismiss()
