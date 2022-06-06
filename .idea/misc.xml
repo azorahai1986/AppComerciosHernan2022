@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/app_bar_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/card_carrito.xml" value="0.25" />
         <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/fragment_ver_imagen.xml" value="0.18" />
+        <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_productos.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/HERNAN/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/layout/item_verimagen.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-anydpi/ic_Texto_sc.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_agregar.xml" value="0.925" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/AppComerciosHernan2022/app/src/main/res/drawable-v24/ic_cartel.xml" value="0.925" />
@@ -71,5 +75,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.18" />
+      </ProjectState>
+    </option>
   </component>
 </project>

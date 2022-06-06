@@ -19,6 +19,7 @@ import com.hernan.appcomercioshernan2022.databinding.ItemProductosBinding
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kotlin.math.absoluteValue
 
 class AdapterRecyclerPrincipal(var mutableListModel: ArrayList<ModeloDeIndumentaria>, val activity:FragmentActivity): RecyclerView.Adapter<AdapterRecyclerPrincipal.ViewHolderModel>() {
 

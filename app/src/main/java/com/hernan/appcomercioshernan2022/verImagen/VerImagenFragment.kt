@@ -88,8 +88,7 @@ class VerImagenFragment : Fragment() {
 
         Log.e("IMAGENESVERIMAGEN", data.toString())
 
-        binding.textViewNombre.text = recibirNombre
-        binding.textviewMarca.text = recibirMarca
+        ("$recibirNombre $recibirMarca").also { binding.textViewNombre.text = it }
         binding.textViewPrecio.text = recibirPrecio
         //Glide.with(requireContext().applicationContext).load(recibirImagen!!).into(binding.imageviewVerImagen)
 
@@ -111,6 +110,7 @@ class VerImagenFragment : Fragment() {
         inflarViewPagerSimilares()
         inflarPagerVerImegenes()
 
+        agregarPedido()
 
 
 
@@ -349,6 +349,11 @@ class VerImagenFragment : Fragment() {
 
 
 
+    }
+    fun agregarPedido(){
+        binding.cardAgregarCarrito.cardCarrito.setOnClickListener {
+            viewModelFirestore.dataListaCarrito.add(viewModelFirestore.dataFirestore)
+        }
     }
 
 

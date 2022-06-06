@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.hernan.appcomercioshernan2022.actividades.MainActivity
 import com.hernan.appcomercioshernan2022.databinding.FragmentAccederBinding
-import com.hernan.appcomercioshernan2022.inicio.ProviderType
 
 
 class AccederFragment : Fragment() {

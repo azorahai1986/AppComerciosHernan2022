@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.lottie.LottieAnimationView
@@ -26,10 +27,9 @@ import com.hernan.appcomercioshernan2022.databinding.FragmentHomeBinding
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.hernan.appcomercioshernan2022.firestore_corrutinas.ViewModelCorrutinas
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+import kotlin.math.absoluteValue
 
-enum class ProviderType {
-    BIENVENIDO
-}
+
 
 private const val ID_DOCUMENT = "idDocument"
 
@@ -99,11 +99,12 @@ class HomeFragment : Fragment() {
     }
     fun inflarRecycler(){
         recyclerView = binding.recyclerProductos
-        layoutManager = GridLayoutManager(activity, 1)
+        layoutManager = LinearLayoutManager(activity)
         recyclerView?.layoutManager = layoutManager
         recyclerView?.setHasFixedSize(true)
         adapterRecyclerPrincipal = AdapterRecyclerPrincipal(arrayListOf(), context as FragmentActivity)
         recyclerView?.adapter = adapterRecyclerPrincipal
+
     }
     fun inflarPager(){
         viewPagerCartelPrincipal = binding.viewpagerCartel
@@ -144,14 +145,15 @@ class HomeFragment : Fragment() {
                 Log.e("index I ", i.toString())
                 Log.e("ArrayPrincipal", arrayPrincipal.toString())
 
-                binding.recyclerProductos.layoutManager?.scrollToPosition(i)
+
             }
 
         }
     }
     @SuppressLint("NotifyDataSetChanged")
     private fun initObserverrs() {
-
+        var indice = 0
+        var arrayPos = ArrayList<Int>()
         viewModelo.fetchUserData().observe(viewLifecycleOwner) {
             adapterRecyclerPrincipal?.arrayFiltro = it as ArrayList<ModeloDeIndumentaria>
 
@@ -159,19 +161,6 @@ class HomeFragment : Fragment() {
 
 
             }
-
-
-
-
-
-
-        viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("ErrorPrueba", it.toString())
-        }
-        viewModel.getFirestore()
-
-
-
 
     }
 
@@ -210,11 +199,10 @@ class HomeFragment : Fragment() {
     fun instanciarVistas(emailUser: String) {
 
         binding.tvVolverInicio.setOnClickListener {
-            /*
+
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_layout, HomeFragment())
-            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()*/
-            //binding.recyclerProductos.layoutManager?.scrollToPosition(i)
-            layoutManager?.smoothScrollToPosition(binding.recyclerProductos, null, 3)
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+
         }
        // Log.e("INSTANCIARVISTA", emailUser)
         val rotate = AnimationUtils.loadAnimation(context, R.anim.rotar)
