@@ -36,6 +36,7 @@ import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.Dele
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.EditFirestore
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import com.hernan.appcomercioshernan2022.inicio.InicioViewModel
+import com.hernan.appcomercioshernan2022.pdf.PdfFragment
 import java.io.IOException
 import java.util.*
 
@@ -104,6 +105,10 @@ class VerImagenFragment : Fragment() {
             }
             true
 
+        }
+
+        binding.cardSimil.setOnClickListener {
+            inflarFragment()
         }
 
         observerDataSimil()
@@ -353,7 +358,13 @@ class VerImagenFragment : Fragment() {
     fun agregarPedido(){
         binding.cardAgregarCarrito.cardCarrito.setOnClickListener {
             viewModelFirestore.dataListaCarrito.add(viewModelFirestore.dataFirestore)
+            Log.e("Lista de viewmodels", viewModelFirestore.dataListaCarrito.toString())
+
         }
+    }
+    fun inflarFragment(){
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_layout, PdfFragment())
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
     }
 
 

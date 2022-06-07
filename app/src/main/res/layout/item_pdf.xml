@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textNDeOrden"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textNombre"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:text="1"/>
+
+    <TextView
+        android:id="@+id/textNombre"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textNDeOrden"
+        android:layout_marginStart="10dp"
+        android:textSize="18dp"
+        android:text="Nombre producto"/>
+
+    <TextView
+        android:id="@+id/textPrecio"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textNombre"
+        android:layout_marginStart="10dp"
+        android:textSize="18dp"
+        android:text=" $ 10000"/>
+
+    <TextView
+        android:id="@+id/cantidadUnidades"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textPrecio"
+        android:layout_marginStart="10dp"
+        android:textSize="18dp"
+        android:text="1"/>
+
+    <TextView
+        android:id="@+id/subtotal"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cantidadUnidades"
+        android:layout_marginStart="10dp"
+        android:textSize="18dp"
+        android:text="$ 10000"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
