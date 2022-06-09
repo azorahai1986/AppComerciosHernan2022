@@ -54,9 +54,11 @@ class AdapterRecyclerPrincipal(var mutableListModel: ArrayList<ModeloDeIndumenta
         Glide.with(activity).load(modelosFb.imagen).into(holder.binding.imageview)
 
 
+
         holder.binding.imageview.setOnClickListener{
 
             viewModelFirestore.dataFirestore = modelosFb
+            viewModelFirestore.position = position
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.frame_layout, VerImagenFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).commit()

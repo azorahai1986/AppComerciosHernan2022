@@ -1,5 +1,6 @@
 package com.hernan.appcomercioshernan2022.pdf
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,8 @@ class AdapterPdf(val arrayPdf:ArrayList<ModeloDeIndumentaria>):RecyclerView.Adap
         val binding = ItemPdfBinding.bind(itemView)
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderPdf =
         ViewHolderPdf(LayoutInflater.from(parent.context).inflate(R.layout.item_pdf, parent, false))
 
@@ -21,7 +24,10 @@ class AdapterPdf(val arrayPdf:ArrayList<ModeloDeIndumentaria>):RecyclerView.Adap
         val arrayProductos = arrayPdf[position]
         holder.binding.textNombre.text = arrayProductos.nombre
         holder.binding.textPrecio.text = arrayProductos.precio
-        holder.binding.textPrecio.text = arrayProductos.precio
+        holder.binding.cantidadUnidades.text = arrayProductos.cantidad
+        holder.binding.subtotal.text = arrayProductos.subtotal
+
+
     }
 
     override fun getItemCount(): Int = arrayPdf.size

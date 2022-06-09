@@ -10,7 +10,9 @@ class ModeloDeIndumentaria(
     val arrayImagen: ArrayList<String> = arrayListOf(),
     val nombre: String = "",
     var precio: String = "",
-    var timestamp: Long = 0L,
+    var posicionEnLista:Int = 0,
+    var cantidad: String = "",
+    var subtotal: String = "",
     @Exclude var type:TYPE = TYPE.ADD
 ){
     enum class TYPE {

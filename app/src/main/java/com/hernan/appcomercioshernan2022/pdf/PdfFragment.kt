@@ -1,5 +1,8 @@
 package com.hernan.appcomercioshernan2022.pdf
 
+import android.content.Context
+import android.graphics.PointF
+import android.icu.lang.UCharacter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelStore
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.databinding.FragmentPdfBinding
@@ -21,7 +25,6 @@ class PdfFragment : Fragment() {
     private val viewModelFirestore:ViewModelFirestore by activityViewModels()
     var layoutManager:RecyclerView.LayoutManager? = null
     var adapter:AdapterPdf? = null
-    var adapterPdf:Pdf? = null
 
 
     override fun onCreateView(
@@ -30,7 +33,8 @@ class PdfFragment : Fragment() {
     ): View? {
         binding = FragmentPdfBinding.inflate(inflater, container, false)
 
-        Log.e("Lista de viewmodels pdf", viewModelFirestore.dataListaCarrito.toString())
+
+
 
 
 
@@ -40,11 +44,15 @@ class PdfFragment : Fragment() {
     private fun inflarRecycler(){
 
         val data = viewModelFirestore.dataListaCarrito
+        Log.e("DATA en Adapter PDF", data.toString())
         layoutManager = LinearLayoutManager(context)
         binding.recyclerListaCompra.layoutManager = layoutManager
         adapter = AdapterPdf(data as ArrayList<ModeloDeIndumentaria>)
         binding.recyclerListaCompra.adapter = adapter
-    }
 
+
+
+
+    }
 
 }

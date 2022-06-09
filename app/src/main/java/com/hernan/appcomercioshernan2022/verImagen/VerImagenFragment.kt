@@ -11,14 +11,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import com.hernan.appcomercioshernan2022.adapters.PagerSimilaresAdapter
-import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.example.navdrawer.modelos_de_datos.PagerSimilares
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,14 +28,14 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.actividades.MainActivity
-import com.hernan.appcomercioshernan2022.databinding.DialogEditarBinding
-import com.hernan.appcomercioshernan2022.databinding.DialogEditarImagenBinding
-import com.hernan.appcomercioshernan2022.databinding.DialogEditarPrecioBinding
-import com.hernan.appcomercioshernan2022.databinding.FragmentVerImagenBinding
+import com.hernan.appcomercioshernan2022.adapters.PagerSimilaresAdapter
+import com.hernan.appcomercioshernan2022.databinding.*
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.MainViewModelo
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.DeleteData
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.crud_firestore.EditFirestore
 import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import com.hernan.appcomercioshernan2022.inicio.InicioViewModel
+import com.hernan.appcomercioshernan2022.pdf.Calculo
 import com.hernan.appcomercioshernan2022.pdf.PdfFragment
 import java.io.IOException
 import java.util.*
@@ -64,7 +64,7 @@ class VerImagenFragment : Fragment() {
 
 // variable para recuperar el usuario
     private lateinit var auth: FirebaseAuth
-    lateinit var binding:FragmentVerImagenBinding
+    lateinit var binding: FragmentVerImagenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,15 +108,14 @@ class VerImagenFragment : Fragment() {
         }
 
         binding.cardSimil.setOnClickListener {
-            inflarFragment()
+            //inflarFragment()
         }
 
         observerDataSimil()
         inflarViewPagerSimilares()
         inflarPagerVerImegenes()
 
-        agregarPedido()
-
+        inflarSpinner()
 
 
 
@@ -355,14 +354,95 @@ class VerImagenFragment : Fragment() {
 
 
     }
-    fun agregarPedido(){
+
+    private fun inflarSpinner(){
+
+        val listCantidades = resources.getStringArray(R.array.cantidades)
+
+        val adapterSpinner = ArrayAdapter(requireContext().applicationContext, android.R.layout.simple_spinner_dropdown_item, listCantidades)
+        binding.spinnerCantidades.adapter = adapterSpinner
+
+        binding.spinnerCantidades.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                when(listCantidades[p2]){
+                     "0", "1", "2","3"->{
+                         agregarPedido(listCantidades[p2])
+                         "${listCantidades[p2]} unidades".also { binding.textCantidad.text = it }
+                     }
+                    "mayor cantidad" -> {
+
+                        dialogSpinner()
+
+                    }
+                }
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+
+
+
+
+    }
+    fun dialogSpinner(){
+
+        val dialogBinding = DialogSpinnerBinding.inflate(requireActivity().layoutInflater, null, false)
+        val dialogConstructor = AlertDialog.Builder(context).setView(dialogBinding.root)
+
+        val alertDialog = dialogConstructor.show()
+
+
+        dialogBinding.textAceptar.setOnClickListener {
+
+            val cantidad = dialogBinding.editCantidades.text.toString()
+            agregarPedido(cantidad)
+
+
+            alertDialog.dismiss()
+
+        }
+
+        dialogBinding.textCancelar.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+    }
+
+
+    fun agregarPedido(cantidades: String){
+        val calculo = Calculo()
+        val multi = calculo.multiplicar(cantidades.toInt(), recibirPrecio!!.toDouble())
+        viewModelFirestore.dataFirestore.cantidad = cantidades
+        viewModelFirestore.dataFirestore.subtotal = multi
+        viewModelFirestore.dataFirestore.posicionEnLista = 0
+        binding.textSubtotal.text = multi
+        binding.textCantidad.text = cantidades
+
+
         binding.cardAgregarCarrito.cardCarrito.setOnClickListener {
-            viewModelFirestore.dataListaCarrito.add(viewModelFirestore.dataFirestore)
+
+            if (cantidades == "0"){
+                Toast.makeText(context, "Debes agregar por lo menos 1 unidad", Toast.LENGTH_SHORT).show()
+            }else{
+                viewModelFirestore.dataListaCarrito.add(viewModelFirestore.dataFirestore)
+                inflarFragmentPdf()
+            }
+
+
+
             Log.e("Lista de viewmodels", viewModelFirestore.dataListaCarrito.toString())
 
         }
+
+
     }
-    fun inflarFragment(){
+    fun inflarFragmentPdf(){
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_layout, PdfFragment())
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
     }
