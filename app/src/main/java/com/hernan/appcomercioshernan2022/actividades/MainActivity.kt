@@ -3,12 +3,14 @@ package com.hernan.appcomercioshernan2022.actividades
 import android.app.UiModeManager
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.snackbar.Snackbar.make
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -24,13 +27,17 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.hernan.appcomercioshernan2022.R
 import com.hernan.appcomercioshernan2022.databinding.ActivityMainBinding
+import com.hernan.appcomercioshernan2022.enlace_con_firebase.viewmodels_crud.ViewModelFirestore
 import com.hernan.appcomercioshernan2022.fragmentos.AccederFragment
 import com.hernan.appcomercioshernan2022.fragmentos.CategoriasFragment
 import com.hernan.appcomercioshernan2022.fragmentos.PorcentajeFragment
 import com.hernan.appcomercioshernan2022.inicio.HomeFragment
+import com.hernan.appcomercioshernan2022.pdf.PdfFragment
 import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
+    private val viewModelFirestore: ViewModelFirestore by viewModels()
+    private val STORAGE_CODE: Int = 100
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding

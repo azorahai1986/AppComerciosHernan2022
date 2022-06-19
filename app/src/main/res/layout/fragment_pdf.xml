@@ -3,17 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="55dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".pdf.PdfFragment">
+
+    <include
+        android:id="@+id/encabezado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_encabezado_pdf"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerListaCompra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/encabezado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/browser_actions_context_menu_row"/>
+
+    <TextView
+        android:id="@+id/textResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btGuardarPdf"
+        android:text="Total presupuesto"
+        android:textSize="24dp"
+        android:layout_marginBottom="20dp"
+        android:shadowColor="@color/cardview_dark_background"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="8"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/textResultado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/colorOnPrimary"/>
+
+    <Button
+        android:id="@+id/btGuardarPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="guardar pdf"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SmoothScroller
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.lottie.LottieAnimationView
 import com.example.navdrawer.modelos_de_datos.CartelPrincipal
@@ -165,6 +166,9 @@ class HomeFragment : Fragment() {
         val position = viewModelFirestore.position
         binding.recyclerProductos.layoutManager?.scrollToPosition(position)
         Handler().postDelayed({ binding.recyclerProductos.smoothScrollToPosition(position) }, 500)
+        binding.recyclerProductos.layoutManager?.layoutDirection
+        binding.recyclerProductos.layoutManager?.offsetChildrenVertical(position)
+
 
 
     }

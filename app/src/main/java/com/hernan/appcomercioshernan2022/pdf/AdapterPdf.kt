@@ -22,10 +22,13 @@ class AdapterPdf(val arrayPdf:ArrayList<ModeloDeIndumentaria>):RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolderPdf, position: Int) {
         val arrayProductos = arrayPdf[position]
+
+
         holder.binding.textNombre.text = arrayProductos.nombre
-        holder.binding.textPrecio.text = arrayProductos.precio
+        holder.binding.textPrecio.text = "$ ${arrayProductos.precio.toDouble()}"
         holder.binding.cantidadUnidades.text = arrayProductos.cantidad
-        holder.binding.subtotal.text = arrayProductos.subtotal
+        holder.binding.subtotal.text = "$ ${arrayProductos.subtotal.toDouble()}"
+        holder.binding.textNDeOrden.text = arrayProductos.posicionEnLista.toString()
 
 
     }

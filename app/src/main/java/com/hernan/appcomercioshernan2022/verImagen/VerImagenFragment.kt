@@ -39,6 +39,7 @@ import com.hernan.appcomercioshernan2022.pdf.Calculo
 import com.hernan.appcomercioshernan2022.pdf.PdfFragment
 import java.io.IOException
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class VerImagenFragment : Fragment() {
@@ -420,9 +421,16 @@ class VerImagenFragment : Fragment() {
         val multi = calculo.multiplicar(cantidades.toInt(), recibirPrecio!!.toDouble())
         viewModelFirestore.dataFirestore.cantidad = cantidades
         viewModelFirestore.dataFirestore.subtotal = multi
-        viewModelFirestore.dataFirestore.posicionEnLista = 0
+        viewModelFirestore.dataFirestore.posicionEnLista = viewModelFirestore.dataListaCarrito.size+1
+
+
         binding.textSubtotal.text = multi
         binding.textCantidad.text = cantidades
+
+
+
+
+
 
 
         binding.cardAgregarCarrito.cardCarrito.setOnClickListener {
@@ -431,6 +439,9 @@ class VerImagenFragment : Fragment() {
                 Toast.makeText(context, "Debes agregar por lo menos 1 unidad", Toast.LENGTH_SHORT).show()
             }else{
                 viewModelFirestore.dataListaCarrito.add(viewModelFirestore.dataFirestore)
+                viewModelFirestore.sumaArray.add(multi.toDouble())
+
+
                 inflarFragmentPdf()
             }
 
@@ -442,6 +453,7 @@ class VerImagenFragment : Fragment() {
 
 
     }
+
     fun inflarFragmentPdf(){
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_layout, PdfFragment())
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()

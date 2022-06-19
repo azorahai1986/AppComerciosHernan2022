@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/colorOnPrimary"
     android:orientation="horizontal"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:background="?attr/colorOnPrimary"
+    android:layout_height="40dp">
 
     <TextView
         android:id="@+id/textNDeOrden"
@@ -14,6 +13,7 @@
         android:background="?attr/colorSecondaryVariant"
         android:text="Nº"
         android:textSize="16dp"
+        android:textStyle="bold"
         android:gravity="center"/>
 
     <TextView
@@ -24,7 +24,9 @@
         android:background="?attr/colorSecondaryVariant"
         android:gravity="center"
         android:text="Descripción producto"
-        android:textSize="16dp"/>
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/textPrecio"
@@ -34,7 +36,9 @@
         android:background="?attr/colorSecondaryVariant"
         android:text="Precio"
         android:textSize="16dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/cantidadUnidades"
@@ -42,20 +46,22 @@
         android:layout_height="match_parent"
         android:layout_margin="1dp"
         android:background="?attr/colorSecondaryVariant"
-        android:text="N"
-        android:textSize="16dp"
-        android:gravity="center"/>
+        android:text="cantidad"
+        android:textSize="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/subtotal"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_margin="1dp"
         android:background="?attr/colorSecondaryVariant"
         android:gravity="center"
         android:text="Sub total"
-        android:textSize="16dp" />
-
-
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
 
 </LinearLayout>
